@@ -1,0 +1,15 @@
+----- Moedas que faltam na sua coleção -----
+
+Valor: 1.500000€
+Ano: 2013
+Tipo de Moeda: regular
+País: espanha
+Metal: cobre
+
+Valor: 0.000000€
+Ano: 0
+Tipo de Moeda: 
+País: 
+Metal: 
+
+--------------------------------------------

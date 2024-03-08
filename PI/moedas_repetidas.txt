@@ -1,0 +1,18 @@
+----- Moedas repetidas do utilizador ----- 
+
+Valor: 2.000000€
+Ano: 2002
+Tipo de Moeda: regular
+Quantidade de Moedas: 45
+País: portugal
+Metal: ouro
+
+Valor: 1.000000€
+Ano: 2022
+Tipo de Moeda: comemorativa
+Quantidade de Moedas: 3
+País: portugal
+Metal: ouro
+
+Caracterização: 50 anos roma
+
