@@ -1,3 +1,4 @@
+
 public class Telemovel {
     
     private String marca;
@@ -24,11 +25,11 @@ public class Telemovel {
         this.armazenamentoOcupado = 0;
         this.fotosGuardadas = 0;
         this.appsInstaladas = 0;
-        this.nomeApp = new String[10];
-        this.mensagens = new String[10];
+        this.nomeApp = new String[100];
+        this.mensagens = new String[100];
     }
 
-    public Telemovel (String marca, String modelo, int resolucaoX, int resolucaoY, int armazenamentoFotos, int armazenamentoApps, int armazenamentoTotal, int armazenamentoOcupado, int fotosGuardadas, int appsInstaladas, String [] nomeApp, String [] mensagens){
+    public Telemovel(String marca, String modelo, int resolucaoX, int resolucaoY, int armazenamentoFotos, int armazenamentoApps, int armazenamentoTotal, int armazenamentoOcupado, int fotosGuardadas, int appsInstaladas, String[] nomeApp, String[] mensagens){
         this.marca = marca;
         this.modelo = modelo;
         this.resolucaoX = resolucaoX;
@@ -43,156 +44,104 @@ public class Telemovel {
         this.mensagens = mensagens;
     }
 
-    public Telemovel getMarca(){
+    public Telemovel(Telemovel umTelemovel){
+        this.marca = umTelemovel.getMarca();
+        this.modelo = umTelemovel.getModelo();
+        this.resolucaoX = umTelemovel.getResolucaoX();
+        this.resolucaoY = umTelemovel.getResolucaoY();
+        this.armazenamentoFotos = umTelemovel.getArmazenamentoFotos();
+        this.armazenamentoApps = umTelemovel.getArmazenamentoApps();
+        this.armazenamentoTotal = umTelemovel.getArmazenamentoTotal();
+        this.armazenamentoOcupado = umTelemovel.getArmazenamentoOcupado();
+        this.fotosGuardadas = umTelemovel.getFotosGuardadas();
+        this.appsInstaladas = umTelemovel.getAppsInstaladas();
+        this.nomeApp = umTelemovel.getNomeApp();
+        this.mensagens = umTelemovel.getMensagens();
+    }
+
+    public String getMarca(){
         return this.marca;
     }
 
-    public Telemovel getModelo(){
+    public String getModelo(){
         return this.modelo;
     }
 
-    public Telemovel getResolucaoX(){
+    public int getResolucaoX(){
         return this.resolucaoX;
     }
 
-    public Telemovel getResolucaoY(){
+    public int getResolucaoY(){
         return this.resolucaoY;
     }
 
-    public Telemovel getArmazenamentoFotos(){
+    public int getArmazenamentoFotos(){
         return this.armazenamentoFotos;
     }
 
-    public Telemovel getArmazenamentoApps(){
+    public int getArmazenamentoApps(){
         return this.armazenamentoApps;
     }
 
-    public Telemovel getArmazenamentoTotal(){
+    public int getArmazenamentoTotal(){
         return this.armazenamentoTotal;
     }
 
-    public Telemovel getArmazenamentoOcupado(){
+    public int getArmazenamentoOcupado(){
         return this.armazenamentoOcupado;
     }
 
-    public Telemovel getFotosGuardadas(){
+    public int getFotosGuardadas(){
         return this.fotosGuardadas;
     }
 
-    public Telemovel getAppsInstaladas(){
+    public int getAppsInstaladas(){
         return this.appsInstaladas;
     }
 
-    public Telemovel getNomeApp(){
+    public String[] getNomeApp(){
         return this.nomeApp;
     }
 
-    public Telemovel getMensagens(){
+    public String[] getMensagens(){
         return this.mensagens;
     }
 
-    public void setMarca(String marca){
-        this.marca = marca;
-    }
-
-    public void setModelo(String modelo){
-        this.modelo = modelo;
-    }
-
-    public void setResolucaoX(int resolucaoX){
-        this.resolucaoX = resolucaoX;
-    }
-
-    public void setResolucaoY(int resolucaoY){
-        this.resolucaoY = resolucaoY;
-    }
-
-    public void setArmazenamentoFotos(int armazenamentoFotos){
-        this.armazenamentoFotos = armazenamentoFotos;
-    }
-
-    public void setArmazenamentoApps(int armazenamentoApps){
-        this.armazenamentoApps = armazenamentoApps;
-    }
-
-    public void setArmazenamentoTotal(int armazenamentoTotal){
-        this.armazenamentoTotal = armazenamentoTotal;
-    }
-
-    public void setArmazenamentoOcupado(int armazenamentoOcupado){
-        this.armazenamentoOcupado = armazenamentoOcupado;
-    }
-
-    public void setFotosGuardadas(int fotosGuardadas){
-        this.fotosGuardadas = fotosGuardadas;
-    }
-
-    public void setAppsInstaladas(int appsInstaladas){
-        this.appsInstaladas = appsInstaladas;
-    }
-    
-    public void setNomeApp(String [] nomeApp){
-        this.nomeApp = nomeApp;
-    }
-
-    public void setMensagens(String [] mensagens){
-        this.mensagens = mensagens;
-    }
-
     public boolean existeEspaco(int numeroBytes){
-        if(getArmazenamentoTotal() > getArmazenamentoOcupado) return true;
+        if(this.armazenamentoTotal - this.armazenamentoOcupado >= numeroBytes) return true;
         else return false;
     }
 
-    public void installaApp (String nome, int tamanho){
-        if(existeEspaco(tamanho)){
-            setArmazenamentoOcupado(getArmazenamentoOcupado() + tamanho);
-            setAppsInstaladas(getAppsInstaladas() + 1);
-            for(int i = 0; i < getNomeApp().length; i++){
-                if(getNomeApp()[i] == null){
-                    getNomeApp()[i] = nome;
-                    break;
-                }
-            }
-        }
-    }
-
-    public void recebeMsg(String msg){
-        for(int i = 0; i < getMensagens().length; i++){
-            if(getMensagens()[i] == null){
-                getMensagens()[i] = msg;
-                break;
-            }
-        }
-    }
+    // public void installaApp(String nome, int tamanho){
+    //     if(existeEspaco(tamanho)){
+    //         setArmazenamentoOcupado(this.armazenamentoOcupado + tamanho);
+    //         this.appsInstaladas++;
+    //         for(int i = 0; i < this.nomeApp.length; i++){
+    //             if(this.nomeApp[i] == null){
+    //                 this.nomeApp[i] = nome;
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
 
     public int tamanhoMedioApps(){
+        if(this.appsInstaladas == 0) return 0;
         int total = 0;
-        for(int i = 0; i < getNomeApp().length; i++){
-            if(getNomeApp()[i] != null){
-                total += getNomeApp()[i].length();
+        for(String appNome : this.nomeApp){
+            if(appNome != null){
+                total += appNome.length(); // Suposição: substituindo pelo comprimento do nome como aproximação do tamanho
             }
         }
-        return total / getAppsInstaladas();
-    }
-
-    public String maiorMsg(){
-        String maior = "";
-        for(int i = 0; i < getMensagens().length; i++){
-            if(getMensagens()[i] != null){
-                if(getMensagens()[i].length() > maior.length()){
-                    maior = getMensagens()[i];
-                }
-            }
-        }
-        return maior;
+        return total / this.appsInstaladas;
     }
 
     public void removeApp(String nome){
-        for(int i = 0; i < getNomeApp().length; i++){
-            if(getNomeApp()[i].equals(nome)){
-                setArmazenamentoOcupado(getArmazenamentoOcupado() - getNomeApp()[i].length());
-                getNomeApp()[i] = null;
+        for(int i = 0; i < this.nomeApp.length; i++){
+            if(nome.equals(this.nomeApp[i])){
+                this.armazenamentoOcupado -= nome.length();
+                this.nomeApp[i] = null;
+                this.appsInstaladas--;
                 break;
             }
         }

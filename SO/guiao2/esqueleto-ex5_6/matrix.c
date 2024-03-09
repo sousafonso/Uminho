@@ -51,28 +51,30 @@ int valueExists(int **matrix, int value) {
 
 
 // ex.6
-// void linesWithValue(int **matrix, int value) {
-//     for(int i = 0; i < ROWS; i++){
-//         int pid = fork();
-//         if(pid == 0){
-//             for(int j = 0; j < COLUMNS; j++){
-//                 if(matrix[i][j] == value){
-//                     printf("Filho %d encontrou o valor %d na linha %d e coluna %d\n", getpid(), value, i, j);
-//                     _exit(i);
-//                 }
-//             }
-//             _exit(-1);
-//         }
-//     }
-//     for(int i = 0; i < ROWS; i++){
-//         pid_t terminated_pid = wait(&status);
-//         if(WIFEXITED(status)){
-//             if(WEXITSTATUS(status) != 255){
-//                 printf ("Pai: O filho %d encontrou o valor %d na linha %d\n", terminated_pid, value, WEXITSTATUS(status));
-//             }
-//             else {
-//                 printf ("Pai: O filho %d não encontrou o valor %d\n", terminated_pid, value);
-//             }
-//         }
-//     }
-// }
+void linesWithValue(int **matrix, int value) {
+    pid_t children [ROWS];
+    for (int i = 0; i < ROWS; i++) {
+        int pid = fork();
+        if (pid == 0) {
+            for (int j = 0; j < COLUMNS; j++) {
+                if (matrix[i][j] == value) {
+                    printf("Filho %d encontrou o valor %d na linha %d\n", getpid(), value, i);
+                    _exit(i);
+                }
+            }
+            exit(-1);
+        } else {
+            children[i] = pid;
+        }
+    }
+
+    for (int i = 0; i < ROWS; i++) {
+        int status;
+        pid_t terminated_pid = wait(children[i], &status, 0);
+        if (WIFEXITED(status)) {
+            if (WEXITSTATUS(status) != 255) {
+                printf("Pai: Filho %d encontrou o valor %d na linha %d\n", terminated_pid, value, WEXITSTATUS(status));
+            }
+        }
+    }
+}

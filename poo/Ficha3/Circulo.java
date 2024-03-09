@@ -16,7 +16,7 @@ public class Circulo{
         this.raio = 0;
     }
 
-    public Circulo(double x, double y, double raio){
+    public Circulo(int x, int y, int raio){
         this.x = x;
         this.y = y;
         this.raio = raio;
@@ -45,19 +45,19 @@ public class Circulo{
         return "O circulo tem x:" + this.getX() + "y:" + this.getY() + "e raio:" + this.getRaio();
     }
 
-    public void setX(double x){
+    public void setX(int x){
         this.x = x;
     }
 
-    public void setY(double y){
+    public void setY(int y){
         this.y = y;
     }
 
-    public void setRaio(double raio){
+    public void setRaio(int raio){
         this.raio = raio;
     }
 
-    public void alteraCentro(double x, double y){
+    public void alteraCentro(int x, int y){
         setX(x);
         setY(y);
     }
@@ -71,15 +71,11 @@ public class Circulo{
     }
 
     // o objetivo é comparar dois circulos
-    public boolean equals (Object o){
-        if (this == 0) return true;
+    public boolean equals(Object o) {
+        if (this == o) return true; // se o objeto for igual a si mesmo retorna verdadeiro
         if (!(o instanceof Circulo)) return false; // se o objeto não for do tipo Circulo retorna falso
         Circulo umCirculo = (Circulo) o;
         return this.x == umCirculo.getX() && this.y == umCirculo.getY() && this.raio == umCirculo.getRaio();
         // return getX() == umCirculo.getX() && getY() == umCirculo.getY() && getRaio() == umCirculo.getRaio();
-    }
-
-    public Circulo clone(){
-        return new Circulo(this);
     }
 }

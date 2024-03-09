@@ -26,5 +26,6 @@ public class E1Teste {
         Exec1alinB e1 = new Exec1alinB();
         System.out.println("O numero de valores entre " + min + " e " + max + " é: " + Arrays.toString(e1.entre(valores, min, max)));
 
+        s.close();
     }
 }

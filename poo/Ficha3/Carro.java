@@ -1,15 +1,17 @@
+
+
 public class Carro {
     private String marca;
     private String modelo;
-    private Int ano;
+    private int ano;
     private Float consumo; // consumo em litros a uma velocidade de 100km/h
-    private Int quilometros;
+    private int quilometros;
     private Float mediaConsumo; // media de consumo desde o ínicio
-    private Int quilometrosUltimaViagem;
+    private int quilometrosUltimaViagem;
     private Float consumoUltimaViagem;
     private Float regeneracao; // capacidade de regeneração de energia (abate ao consumo) quando se trava durante 1 km (o cálculo é também linear)
 
-    public Carro(String marca, String modelo, Int ano, Float consumo, Int quilometros, Float mediaConsumo, Int quilometrosUltimaViagem, Float consumoUltimaViagem, Float regeneracao){
+    public Carro(String marca, String modelo, int ano, Float consumo, int quilometros, Float mediaConsumo, int quilometrosUltimaViagem, Float consumoUltimaViagem, Float regeneracao){
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
@@ -37,11 +39,11 @@ public class Carro {
         return this.modelo;
     }
 
-    public void setAno(Int ano){
+    public void setAno(int ano){
         this.ano = ano;
     }
 
-    public Int getAno(){
+    public int getAno(){
         return this.ano;
     }
 
@@ -53,11 +55,11 @@ public class Carro {
         return this.consumo;
     }
 
-    public void setQuilometros(Int quilometros){
+    public void setQuilometros(int quilometros){
         this.quilometros = quilometros;
     }
 
-    public Int getQuilometros(){
+    public int getQuilometros(){
         return this.quilometros;
     }
 
@@ -69,11 +71,11 @@ public class Carro {
         return this.mediaConsumo;
     }
 
-    public void setQuilometrosUltimaViagem(Int quilometrosUltimaViagem){
+    public void setQuilometrosUltimaViagem(int quilometrosUltimaViagem){
         this.quilometrosUltimaViagem = quilometrosUltimaViagem;
     }
 
-    public Int getQuilometrosUltimaViagem(){
+    public int getQuilometrosUltimaViagem(){
         return this.quilometrosUltimaViagem;
     }
 
@@ -95,7 +97,7 @@ public class Carro {
 
     public void ligaCarro(){
         quilometrosUltimaViagem = 0;
-        consumoUltimaViagem = 0;
+        consumoUltimaViagem = 0.0f; // Fix: Convert the integer value to float
         System.out.println("Carro ligado");
     }
 
@@ -105,7 +107,7 @@ public class Carro {
 
     public void resetUltimaViagem(){
         quilometrosUltimaViagem = 0;
-        consumoUltimaViagem = 0;
+        consumoUltimaViagem = 0.0f; // Fix: Convert the integer value to float
     }
 
     public void avancaCarro(double metros, double velocidade){
