@@ -77,4 +77,9 @@ public class LinhaEncomenda {
     public double calculaValorDesconto() {
         return precoAntesImpostos * quantidadeEncomendada * (percentagemDesconto / 100);
     }
+
+    public LinhaEncomenda clone() {
+        return new LinhaEncomenda(this.referenciaProduto, this.descricaoProduto, this.precoAntesImpostos,
+                                    this.quantidadeEncomendada, this.taxaImposto, this.percentagemDesconto);
+    }
 }
