@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Date; // Import the Data class
 
@@ -172,23 +173,32 @@ public class EncEficiente{
      * @brief Add a line to the order
      * @param linha
      */
-    public EncEficiente clone(){
-        return new EncEficiente(this);
+    public EncEficiente clone() {
+        EncEficiente newEnc = new EncEficiente();
+        newEnc.setNome(this.nome);
+        newEnc.setNif(this.nif);
+        newEnc.setMorada(this.morada.clone()); // Make a copy of the array
+        newEnc.setNEnc(this.nEnc);
+        newEnc.setData((Date)this.data.clone()); // Ensure Date is cloned properly
+        for (LinhaEncomenda l : this.linhas) {
+            newEnc.getLinhas().add(l.clone());
+        }
+        return newEnc;
     }
-
     /**
      * @brief Add a line to the order
      * @param linha
      */
-    public boolean equals(Object o){
-        if(this == o){
-            return true;
-        }
-        if((o == null) || (this.getClass() != o.getClass())){
-            return false;
-        }
-        EncEficiente e = (EncEficiente) o;
-        return (this.nome.equals(e.getNome()) && this.nif == e.getNif() && this.morada.equals(e.getMorada()) && this.nEnc == e.getNEnc() && this.data.equals(e.getData()) && this.linhas.equals(e.getLinhas()));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if ((o == null) || (getClass() != o.getClass())) return false;
+        EncEficiente that = (EncEficiente) o;
+        return nif == that.nif &&
+                nEnc == that.nEnc &&
+                nome.equals(that.nome) &&
+                Arrays.equals(morada, that.morada) && // Correct way to compare arrays
+                data.equals(that.data) &&
+                linhas.equals(that.linhas);
     }
 
     /**
