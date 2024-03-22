@@ -11,6 +11,18 @@ public class Lampada {
         this.maxPotencia = 0;
     }
 
+    public Lampada(double consumo, boolean estado, double maxPotencia){
+        this.consumo = consumo;
+        this.estado = estado;
+        this.maxPotencia = maxPotencia;
+    }
+
+    public Lampada(Lampada umaLampada){
+        this.consumo = umaLampada.getConsumo();
+        this.estado = umaLampada.getEstado();
+        this.maxPotencia = umaLampada.getMaxPotencia();
+    }
+    
     public void lampON(){
         this.estado = true;
     }
@@ -67,5 +79,8 @@ public class Lampada {
         lampECO();
     }
 
+    public Lampada clone(){
+        return new Lampada(this);
+    }
 
 }

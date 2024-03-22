@@ -1,5 +1,3 @@
-package poo.Ficha4;
-
 public class Stack {
     private int[] stack;
     private int top;

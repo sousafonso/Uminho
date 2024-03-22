@@ -117,14 +117,6 @@ public class EncEficiente{
     public void setNome(String nome){
         this.nome = nome;
     }
-    
-    /**
-     * @brief Clone the LinhaEncomenda object
-     * @return a clone of the LinhaEncomenda object
-     */
-    public LinhaEncomenda clone(){
-        return new LinhaEncomenda(this);
-    }
 
     /**
      * @brief Set the NIF

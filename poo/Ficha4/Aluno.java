@@ -1,5 +1,3 @@
-package poo.Ficha4;
-
 public class Aluno {
     private String nome;
     private int numero;

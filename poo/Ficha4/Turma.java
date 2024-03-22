@@ -1,5 +1,3 @@
-package poo.Ficha4;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +23,12 @@ public class Turma {
          * this.alunos = alunos;  porque se for feito assim, a lista de alunos da turma vai ser a mesma lista de alunos que foi passada como argumento
          * this.alunos = new ArrayList<>(alunos); porque se for feito assim, a lista de alunos da turma vai ser uma cópia da lista de alunos que foi passada como argumento
          */
-        this.alunos = new ArrayList<Aluno>();
-        for (Aluno aluno : alunos) {
-            this.alunos.add(aluno.clone());
-        }
+
+
+        // this.alunos = new ArrayList<Aluno>();
+        // for (Aluno aluno : alunos) {
+        //     this.alunos.add(aluno.clone());
+        // }
 
         // ou 
 
@@ -42,6 +42,10 @@ public class Turma {
         // for (int i = 0; i < alunos.size(); i++) {
         //     this.alunos.add(alunos.get(i).clone());
         // }
+        //
+        // ou 
+
+        this.alunos = alunos.stream().map(Aluno::clone).collect(Collectors.toList()); // ou map(a -> a.clone())
     }
 
     /**
@@ -70,11 +74,7 @@ public class Turma {
      * @return
      */
     public List<Aluno> getAlunos() {
-        List<Aluno> res = new ArrayList<Aluno>();
-        for (Aluno aluno : alunos) {
-            res.add(aluno.clone());
-        }
-        return res;
+        return this.alunos.stream().map(Aluno::clone).collect(Collectors.toList());
     }
 
     /**
@@ -185,6 +185,94 @@ public class Turma {
         }
         Turma turma = (Turma) o;
         return this.nome.equals(turma.getNome()) && alunos.equals(turma.getAlunos());
+    }
+
+    public boolean existeAlunoNumer (String numero){
+        long count = alunos.stream().filter(a -> String.valueOf(a.getNumero()).equals(numero)).count();
+        return count > 0;
+
+        // ou
+        /*
+         * boolean res = false;
+         * for (Aluno aluno : alunos) {
+         *    if (String.valueOf(aluno.getNumero()).equals(numero)) {
+         *       res = true;
+         *      break;
+         *   }
+         * }
+         * 
+         * return res;
+         */
+    }
+    
+    public boolean existeAlunoNome(String nome) {
+        long count = alunos.stream().filter(a -> a.getNome().equals(nome)).count();
+        return count > 0;
+
+        // ou
+        /*
+         * boolean res = false;
+         * for (Aluno aluno : alunos) {
+         *    if (aluno.getNome().equals(nome)) {
+         *       res = true;
+         *      break;
+         *   }
+         * }
+         * 
+         * return res;
+         */
+    }
+
+    public List <Aluno> alunosOrdemNumero() {
+        return alunos.stream().sorted(Comparator.comparing(Aluno::getNumero)).collect(Collectors.toList());
+    }
+
+    public List <Aluno> alunosOrdemDecrescenteNota() {
+        return alunos.stream().sorted(Comparator.comparing(Aluno::getNota).reversed()).collect(Collectors.toList());
+    }
+
+    public Aluno getNota (String nome) {
+        return alunos.stream().filter(a -> a.getNome().equals(nome)).findFirst().orElse(null);
+    }
+
+    /**
+     * @brief Devolve um conjunto de alunos ordenados por ordem alfabética
+     * @return
+     */
+    public Set <Aluno> alunosOrdemAlfabetica() {
+        return alunos.stream().sorted(Comparator.comparing(Aluno::getNome)).collect(Collectors.toSet());
+
+        // ou
+
+        // return alunos.stream().sorted((a1, a2) -> a1.getNome().compareTo(a2.getNome())).collect(Collectors.toSet());
+
+        // ou
+
+        /*
+         * Set <Aluno> res = new TreeSet<>(new Comparator<Aluno>() {
+         *   public int compare(Aluno a1, Aluno a2) {
+         *     return a1.getNome().compareTo(a2.getNome());
+         * 
+         *  }
+         * });
+         * 
+         * res.addAll(alunos);
+         * return res;
+         * 
+         */
+    }
+
+    public Aluno MelhorAluno() {
+        return alunos.stream().max(Comparator.comparing(Aluno::mediaNotas)).orElse(null);
+        // return alunos.strem()
+    }
+
+    public List <Aluno> alunosOrdemDecrescenteNumero() {
+        return alunos.stream().sorted(Comparator.comparing(Aluno::getNumero).reversed()).collect(Collectors.toList());
+    }
+
+    public Set <Aluno> alunosAprovados() {
+        return alunos.stream().filter(a -> a.mediaNotas() >= 10).collect(Collectors.toSet());
     }
     
 }

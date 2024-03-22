@@ -1,5 +1,3 @@
-package poo.Ficha4;
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
