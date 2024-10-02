@@ -33,34 +33,37 @@ void printMatrix(int **matrix) {
 }
 
 void lookupNumber(int** matrix, int value, int* vector){
+    Minfo info;
     int status;
     int pd[2];
     pipe(pd);
 
-    for (int i = 0; i < ROWS; i++) {
+    for (int i = 0; i < ROWS; i++) { // ciclo para criar processos filhos para cada linha
         pid_t pid = fork();
         if (pid == 0) { // filho
             close(pd[0]);
-            int counter = 0;
+            int counter = 1;
             for (int j = 0; j < COLUMNS; j++) {
                 if (matrix[i][j] == value) {
-                    counter++;
+                    info.line_nr = i;
+                    info.ocur_nr = counter++;
                 }
             }
-            write(pd[1], &counter, sizeof(counter));
+            write(pd[1], &info, sizeof(info));
             close(pd[1]);
             _exit(0);
         }
     }
 
-    for (int i = 0; i < ROWS; i++) {
-        int received_data;
-        read(pd[0], &received_data, sizeof(received_data));
-        vector[i] = received_data;
+    close(pd[1]);
+    
+    for (int i = 0; i < ROWS; i++) { // ciclo para ler os valores dos filhos
+        read(pd[0], &info, sizeof(info));
+        vector[info.line_nr] = info.ocur_nr;
     }
     close(pd[0]);
 
-    for (int i = 0; i < ROWS; i++) {
+    for (int i = 0; i < ROWS; i++) { // ciclo para esperar que os filhos terminem
         wait(&status);
     }
 }

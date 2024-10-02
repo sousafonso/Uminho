@@ -1,0 +1,6 @@
+{
+    "github.experimental.multipleAccounts": false,
+    "github.copilot.preferredAccount": "sousafonso",
+    "github.copilot.chat.experimental.generateTests.codeLens": false,
+    "github.copilot.chat.experimental.inlineChatCompletionTrigger.enabled": true
+}
