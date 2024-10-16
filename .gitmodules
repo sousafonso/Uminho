@@ -4,3 +4,9 @@
 [submodule "1ano/LI2"]
 	path = 1ano/LI2
 	url = https://github.com/josevasconcelos2002/LI2
+[submodule "1ano/2sem/LI2"]
+	path = 1ano/2sem/LI2
+	url = https://github.com/josevasconcelos2002/LI2.git
+[submodule "2ano/1sem/grupo-77"]
+	path = 2ano/1sem/grupo-77
+	url = https://github.com/dium-li3/grupo-77.git
