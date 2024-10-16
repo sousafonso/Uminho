@@ -1,38 +1,33 @@
+# Classe grafo para representaçao de grafos,
 import math
 from queue import Queue
 
-import networkx as nx  # biblioteca de tratamento de grafos necessária para desenhar graficamente o grafo
+import networkx as nx  # biblioteca de tratamento de grafos necessária para desnhar graficamente o grafo
 import matplotlib.pyplot as plt  # idem
 
 from Node import Node
 
-
 # Constructor
-# Number of edges
-# Adjacancy matrix, adjacency list, list of edges
-
 # Methods for adding edges
-
 # Methods for removing edges
-
 # Methods for searching a graph
-# BFS, DFS, 
-
+# BFS, DFS, A*, Greedy
 
 class Graph:
     def __init__(self, directed=False):
         self.m_nodes = []  
         self.m_directed = directed
-        self.m_graph = {}  # dicionario para armazenar os nodos e arestas
+        self.m_graph = {}  
+        self.m_h = {}  
 
-    #############
+    #################################
     #    escrever o grafo como string
-    #############
+    #################################
     def __str__(self):
         out = ""
         for key in self.m_graph.keys():
             out = out + "node" + str(key) + ": " + str(self.m_graph[key]) + "\n"
-            return out
+        return out
 
     ################################
     #   encontrar nodo pelo nome
@@ -43,12 +38,12 @@ class Graph:
         for node in self.m_nodes:
             if node == search_node:
                 return node
-            else:
-                return None
+          
+        return None
 
-    ############################
+    ##############################3
     #   imprimir arestas
-    ############################
+    ############################333333
 
     def imprime_aresta(self):
         listaA = ""
@@ -58,9 +53,9 @@ class Graph:
                 listaA = listaA + nodo + " ->" + nodo2 + " custo:" + str(custo) + "\n"
         return listaA
 
-    ############################
+    ################
     #   adicionar   aresta no grafo
-    ############################
+    ######################
 
     def add_edge(self, node1, node2, weight):
         n1 = Node(node1)
@@ -70,28 +65,32 @@ class Graph:
             n1.setId(n1_id)
             self.m_nodes.append(n1)
             self.m_graph[node1] = []
-        
+        else:
+            n1 = self.get_node_by_name(node1)
 
         if (n2 not in self.m_nodes):
             n2_id = len(self.m_nodes)  # numeração sequencial
             n2.setId(n2_id)
             self.m_nodes.append(n2)
             self.m_graph[node2] = []
-        
+        else:
+            n2 = self.get_node_by_name(node2)
 
-        self.m_graph[node1].append((node2, weight))  
+        self.m_graph[node1].append((node2, weight)) 
 
+        if not self.m_directed:
+            self.m_graph[node2].append((node1, weight))
 
     #############################
     # devolver nodos
-    #############################
+    ##########################
 
     def getNodes(self):
         return self.m_nodes
 
     #######################
     #    devolver o custo de uma aresta
-    #######################
+    ##############3
 
     def get_arc_cost(self, node1, node2):
         custoT = math.inf
@@ -113,11 +112,10 @@ class Graph:
         i = 0
         while i + 1 < len(teste):
             custo = custo + self.get_arc_cost(teste[i], teste[i + 1])
-            #print(teste[i])
             i = i + 1
         return custo
 
-    ################################################################################
+       ################################################################################
     #     procura DFS (Depth First Search)
     ####################################################################################
 
@@ -192,16 +190,9 @@ class Graph:
                 new_path.append(neighbour[0]) # adiciona o vizinho ao caminho
                 q.put(new_path) # coloca o novo caminho na fila
         return None
-    
-    ############################
-    #  SOLUÇÃO DO PROFESSOR
-    ############################
-
-    #def procura_BFS2(self, inicio, fim):
-    
-
-    ##############################
-    # função  getneighbours, devolve vizinhos de um nó
+  
+    ####################
+    # funçãop  getneighbours, devolve vizinhos de um nó
     ##############################
 
     def getNeighbours(self, nodo):
@@ -234,3 +225,81 @@ class Graph:
 
         plt.draw()
         plt.show()
+
+    ####################################33
+    #    add_heuristica   -> define heuristica para cada nodo 1 por defeito....
+    ################################3
+
+    def add_heuristica(self, n, estima):
+        n1 = Node(n)
+        if n1 in self.m_nodes:
+            self.m_h[n] = estima
+
+
+
+    ##########################################
+    #    A* - To Do
+    # RACIOCINIO
+    # 1.  Inicializa-se o caminho com o nodo inicial
+    # 2.  Enquanto o ultimo nodo do caminho for diferente do nodo final
+    # 3.  Obtem-se o nodo
+    # 4.  Obtem-se os vizinhos do nodo
+    # 5.  Ordena-se os vizinhos por ordem crescente do peso para cada vizinho
+    # 6.  Para cada vizinho calcula-se a heuristica
+    # 7.  Se o vizinho não pertence ao caminho adiciona-se o vizinho ao caminho
+    # 8.  Termina o ciclo
+    ##########################################
+    def a_star(self, inicio, fim):
+        caminho = []
+        caminho.append(inicio)
+        while caminho[-1] != fim:
+            nodo = caminho[-1]
+            vizinhos = self.getNeighbours(nodo)
+            vizinhos.sort(key=lambda x: x[1])
+            for (adjacente, peso) in vizinhos:
+                if adjacente not in caminho:
+                    caminho.append(adjacente)
+                    break
+        return caminho
+        
+
+    ###################################3
+    # devolve heuristica do nodo
+    ####################################
+
+    def getH(self, nodo):
+        if nodo not in self.m_h.keys():
+            return 1000
+        else:
+            return (self.m_h[nodo])
+
+
+    ##########################################
+    #   Greedy - To Do
+    # RACIOCINIO
+    # 1.  Inicializa-se o caminho com o nodo inicial
+    # 2.  Enquanto o ultimo nodo do caminho for diferente do nodo final
+    # 3.  Obtem-se o nodo
+    # 4.  Obtem-se os vizinhos do nodo
+    # 5.  Ordena-se os vizinhos por ordem crescente do peso para cada vizinho
+    # 7.  Se o vizinho não pertence ao caminho adiciona-se o vizinho ao caminho
+    # 9.  Termina o ciclo
+    ##########################################
+    def greedy (self, inicio, fim):
+        caminho = []
+        caminho.append(inicio)
+        while caminho[-1] != fim:
+            nodo = caminho[-1]
+            vizinhos = self.getNeighbours(nodo)
+            vizinhos.sort(key=lambda x: x[1])
+            for (adjacente, peso) in vizinhos:
+                if adjacente not in caminho:
+                    caminho.append(adjacente)
+                    break
+        return caminho
+
+    
+
+
+
+

@@ -1,3 +1,6 @@
 [submodule "Projeto_LI3 "]
 	path = "Projeto_LI3 "
 	url = https://github.com/dium-li3/grupo-77
+[submodule "1ano/LI2"]
+	path = 1ano/LI2
+	url = https://github.com/josevasconcelos2002/LI2
