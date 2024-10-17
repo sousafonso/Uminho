@@ -1,4 +1,4 @@
-#Welcome to My Portfolio! 🎓💻
+# Welcome to My Portfolio! 🎓💻
 
 This repository serves as a portfolio where I showcase the projects and assignments I've worked on during my bachelor's degree in Software Engineering at the University of Minho. It's a collection of everything I've been involved in academically, from small exercises to larger team-based projects.
 
