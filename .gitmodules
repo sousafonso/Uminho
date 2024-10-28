@@ -10,3 +10,6 @@
 [submodule "2ano/1sem/grupo-77"]
 	path = 2ano/1sem/grupo-77
 	url = https://github.com/dium-li3/grupo-77.git
+[submodule "2ano/2ano/1sem"]
+	path = 2ano/2ano/1sem
+	url = https://github.com/dium-li3/grupo-77.git
