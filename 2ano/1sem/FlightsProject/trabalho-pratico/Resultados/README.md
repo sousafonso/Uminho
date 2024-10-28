@@ -1,0 +1,2 @@
+Pasta resultados
+Não apagar

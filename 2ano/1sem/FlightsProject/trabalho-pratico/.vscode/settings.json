@@ -1,0 +1,13 @@
+{
+    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve",
+    "files.associations": {
+        "datatype.h": "c",
+        "stdio.h": "c",
+        "queries.h": "c",
+        "parser.h": "c",
+        "datastore.h": "c",
+        "utils.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c"
+    }
+}
