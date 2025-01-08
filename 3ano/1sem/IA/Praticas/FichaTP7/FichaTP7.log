@@ -1,0 +1,49 @@
+%PARTE 1
+
+% i) Construir a extensão de um predicado que calcule a soma de três valores inteiros.
+soma3(X,Y,Z,Soma) :- Soma is X+Y+Z.
+
+% ii) Construir a extensão de um predicado que calcule a soma de um conjunto de valores
+somaLista([],0).
+somaLista([X|L],Soma) :- somaLista(L,Soma1), Soma is X+Soma1.
+
+% iii) Construir a extensão de um predicado que calcule o maior valor entre dois valores;
+maior(X,Y,X) :- X>=Y.
+maior(X,Y,Y) :- X<Y.
+
+% iv) Construir a extensão de um predicado que calcule o maior de um conjunto de valores;
+maiorLista([X],X).
+maiorLista([X|L],Maior) :- maiorLista(L,Maior1), maior(X,Maior1,Maior).
+
+% v) Construir a extensão de um predicado que calcule a média aritmética de um conjunto de valores;
+mediaLista(L,Media) :- somaLista(L,Soma), length(L,Tam), Media is Soma/Tam.
+
+% vi. Construir a extensão de um predicado que ordene de modo crescente uma sequência de valores
+% ordena(L1,L2) :- L2 é a lista L1 ordenada de modo crescente
+ordena([],[]).
+ordena([X|L1],L2) :- ordena(L1,L3), insere(X,L3,L2).
+
+% vii) Construa a extensão de um predicado capaz de caracterizar os números pares.
+par(X) :- X mod 2 =:= 0.
+
+% viii) Construa a extensão de um predicado capaz de caracterizar os números ímpares.
+impar(X) :- X mod 2 =:= 1.
+
+% PARTE 2
+% viii. Construir a extensão do predicado «pertence» que verifica se um elemento existe dentro de uma lista de elementos;
+pertence(X,[X|_]).
+pertence(X,[_|L]) :- pertence(X,L).
+
+% ix. Construir a extensão do predicado «comprimento» que determina o número de elementos de uma lista;
+comprimento([],0).
+comprimento([_|L],Comp) :- comprimento(L,Comp1), Comp is Comp1+1.
+
+% x. Construir a extensão do predicado «diferentes» que calcula a quantidade de elementos diferentes existentes numa lista;
+diferentes([],0).
+diferentes([X|L],Dif) :- pertence(X,L), diferentes(L,Dif).
+diferentes([X|L],Dif) :- \+pertence(X,L), diferentes(L,Dif1), Dif is Dif1+1.
+
+% xi. Construir a extensão do predicado «apaga1» que apaga a primeira ocorrência de um elemento de uma lista
+apaga1(_,[],[]).
+apaga1(X,[X|L],L).
+apaga1(X,[Y|L],[Y|L1]) :- apaga1(X,L,L1).
