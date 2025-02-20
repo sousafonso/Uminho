@@ -1,5 +1,5 @@
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class TesteIntegerArray {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class TesteIntegerArray {
         int n = sc.nextInt();
         int[] array = new int[n];
         System.out.println("Digite os inteiros:");
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             array[i] = sc.nextInt();
         }
         

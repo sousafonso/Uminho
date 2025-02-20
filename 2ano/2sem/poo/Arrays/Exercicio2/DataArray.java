@@ -6,12 +6,12 @@ import java.util.List;
 public class DataArray {
     private List<LocalDate> datas = new ArrayList<>();
 
-    // (a) Inserir nova data
+    // (a) Inserir uma nova data
     public void insereData(LocalDate data) {
         datas.add(data);
     }
 
-    // (b) Retorna a data do array mais próxima da data fornecida
+    // (b) Dada uma data, retorna a data do array mais próxima
     public LocalDate dataMaisProxima(LocalDate data) {
         if (datas.isEmpty()) return null;
         LocalDate maisProxima = datas.get(0);
@@ -26,13 +26,12 @@ public class DataArray {
         return maisProxima;
     }
 
-    // (c) Retorna uma String com todas as datas
+    // (c) Devolver uma String com todas as datas
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (LocalDate d : datas) {
+        for (LocalDate d : datas)
             sb.append(d).append(" ");
-        }
         return sb.toString().trim();
     }
 }

@@ -27,7 +27,7 @@ public class Pauta {
         int max = Integer.MIN_VALUE;
         for (int[] aluno : notasTurma)
             for (int nota : aluno)
-                if(nota > max)
+                if (nota > max)
                     max = nota;
         return max;
     }
@@ -36,7 +36,7 @@ public class Pauta {
         int min = Integer.MAX_VALUE;
         for (int[] aluno : notasTurma)
             for (int nota : aluno)
-                if(nota < min)
+                if (nota < min)
                     min = nota;
         return min;
     }
@@ -64,7 +64,7 @@ public class Pauta {
         double maxMedia = Double.MIN_VALUE;
         for (int i = 0; i < 5; i++) {
             double media = mediaNotasUnidadeCurricular(i);
-            if(media > maxMedia) {
+            if (media > maxMedia) {
                 maxMedia = media;
                 ucIndex = i;
             }

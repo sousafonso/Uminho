@@ -1,13 +1,22 @@
-# Exercício 1.1
-def starts_with_hello(line):
-    return re.match(r'^hello', line) is not None
+from re import *
 
-print(starts_with_hello(line1))  # True
-print(starts_with_hello(line2))  # False
-print(starts_with_hello(line3))  # False
+line1 = "HELLO worldo"
+line2 = "goodbye world"
+line3 = "hi, hello there"
 
-def wherever_with_hello (line):
-    return re.search(r"hello+?", line) is not None
+res1 = match(r'([Hh][Ee][Ll][Ll][Oo])', line1)
+if res1:
+   print(res1)
+   print(res1.group(0))
 
-def MaiMin (line):
-    return re.findall(r"hello+?|HELLO+?") is not None
+res2 = match(r'(?i:hello)', line2)
+if res2:
+  print(res2)
+else:
+  print("Não encontrei nada!")
+
+res3 = match(r'(?i:h.{4,20}o)', line1)
+if res3:
+  print(res3.group(0))
+else:
+  print("Não encontrei nada!")
