@@ -5,11 +5,7 @@ def encrypt(key, text):
         shift = ord(key[i % len(key)].upper()) - ord('A')
         if ch.isalpha():
             # Preserva (uppercase/lowercase) e aplica a cifra de César com o deslocamento da chave
-            if ch.isupper():
-                base = ord('A')
-            else:
-                base = ord('a')
-            result += chr((ord(ch) - base + shift) % 26 + base)
+            result += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))
         else:
             result += ch
     return result.upper()
@@ -20,11 +16,7 @@ def decrypt(key, text):
         # Calcula o deslocamento com base no caractere da chave
         shift = ord(key[i % len(key)].upper()) - ord('A')
         if ch.isalpha():
-            if ch.isupper():
-                base = ord('A')
-            else:
-                base = ord('a')
-            result += chr((ord(ch) - base - shift) % 26 + base)
+            result += chr((ord(ch) - ord('A') - shift) % 26 + ord('A'))
         else:
             result += ch
     return result

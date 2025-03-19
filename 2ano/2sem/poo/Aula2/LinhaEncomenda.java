@@ -1,69 +1,69 @@
-public class LinhaEncomenda{
+public class LinhaEncomenda {
     private String referencia;
     private String descricao;
-    private int precoBefore;
+    private double precoBefore;  
     private int quantidade;
-    private int imposto;
-    private int desconto;
+    private double imposto;      
+    private double desconto;     
 
-    public String getReferencia (){
+    public String getReferencia() {
         return this.referencia;
     }
 
-    public String getDescricao (){
+    public String getDescricao() {
         return this.descricao;
     }
 
-    public int getPrecoBefore (){
+    public double getPrecoBefore() {  
         return this.precoBefore;
     }
 
-    public int getQuantidade (){
+    public int getQuantidade() {
         return this.quantidade;
     }
 
-    public int getImposto (){
+    public double getImposto() {
         return this.imposto;
     }
 
-    public int getDesconto (){
+    public double getDesconto() {  
         return this.desconto;
     }
 
-    public void setReferencia (String referencia){
+    public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
-    public void setDescricao (String descricao){
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public void setPrecoBefore (int precoBefore){
+    public void setPrecoBefore(double precoBefore) {  
         this.precoBefore = precoBefore;
     }
 
-    public void setQuantidade (int quantidade){
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
-    public void setImposto (int imposto){
+    public void setImposto(double imposto) {  
         this.imposto = imposto;
     }
 
-    public void setDesconto (int desconto){
+    public void setDesconto(double desconto) {  
         this.desconto = desconto;
     }
 
-    public LinhaEncomenda (){
+    public LinhaEncomenda() {
         this.referencia = "";
         this.descricao = "";
-        this.precoBefore = 0;
+        this.precoBefore = 0.0;  
         this.quantidade = 0;
-        this.imposto = 0;
-        this.desconto = 0;
+        this.imposto = 0.0;
+        this.desconto = 0.0;     
     }
 
-    public LinhaEncomenda (String referencia, String descricao, int precoBefore, int quantidade, int imposto, int desconto){
+    public LinhaEncomenda(String referencia, String descricao, double precoBefore, int quantidade, double imposto, double desconto) {
         this.referencia = referencia;
         this.descricao = descricao;
         this.precoBefore = precoBefore;
@@ -72,7 +72,7 @@ public class LinhaEncomenda{
         this.desconto = desconto;
     }
 
-    public LinhaEncomenda (LinhaEncomenda le){
+    public LinhaEncomenda(LinhaEncomenda le) {
         this.referencia = le.getReferencia();
         this.descricao = le.getDescricao();
         this.precoBefore = le.getPrecoBefore();
@@ -81,18 +81,34 @@ public class LinhaEncomenda{
         this.desconto = le.getDesconto();
     }
 
-    public double calculaValorLinhaEnc(){
-        double precoComDesconto = precoBefore * (1 - (desconto / 100));
-        double precoComImposto = precoComDesconto * (1 + (imposto / 100));
+    public double calculaValorLinhaEnc() {
+        double precoComDesconto = precoBefore * (1 - (desconto / 100.0));
+        double precoComImposto = precoComDesconto * (1 + (imposto / 100.0));
         return quantidade * precoComImposto;
     }
 
-    public double calculaValorDesconto(){
-        return quantidade * precoBefore * (desconto / 100);
+    public double calculaValorDesconto() {
+        return quantidade * precoBefore * (desconto / 100.0);
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if ((o == null) || (this.getClass() != o.getClass())) {
+            return false;
+        }
+        LinhaEncomenda le = (LinhaEncomenda) o;
+        return this.referencia.equals(le.getReferencia()) &&
+               this.descricao.equals(le.getDescricao()) &&
+               this.precoBefore == le.getPrecoBefore() &&
+               this.quantidade == le.getQuantidade() &&
+               this.imposto == le.getImposto() &&
+               this.desconto == le.getDesconto();
     }
 
     public static void main(String[] args) {
-        LinhaDeEncomenda linha = new LinhaDeEncomenda("P1234", "Produto Teste", 100.0, 10, 23.0, 10.0);
+        LinhaEncomenda linha = new LinhaEncomenda("P1234", "Produto Teste", 100.0, 10, 23.0, 10.0);
 
         // Testando os métodos
         System.out.println("Valor da linha de encomenda: " + linha.calculaValorLinhaEnc());

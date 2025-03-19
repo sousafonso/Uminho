@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-bar {
+    background-color: #c02e2e;
+    position: sticky;
+    height: 80px;
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: space-between;
+    align-items: center;
+    top : 0;
+    z-index: 999;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    /* align-items: center; */
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+#navbar__links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.fa_gem {
+    margin: 0.5rem;
+}
+
+.navbar__menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
