@@ -52,10 +52,114 @@ VR (fundo de maneio) =
 ### Cash-flow
 
 O CF de um projeto é calculado pela soma do Cash-flow 
-
+``` math
 CFE = (Vendas - Custos - AR - EFF) (1 - t) + AR - EFF
+```
+```math
 CFE = (Vendas - Custos) (1 - t) + AR * t + EFF * t
+```
 
+```math
 RL (resultado líquido) = RAI - imposto a pagar = RAI - t * RAI = RAI (1 - t)
-
+```
 RAI = resultado antes de impostos
+
+---
+## Fórmulas
+
+### 1. Fórmulas para Cálculo dos Fluxos de Caixa (Após Impostos)
+
+**Amortização (Método das Quotas Constantes):**
+
+```math
+Amortizacao = Valor de aquisicao / Vida util  = Valor de aquisicao * taxa de amortizacao
+```
+
+**Lucro Antes de Impostos (LAI):**
+```math
+LAI = Vendas (receitas) - Custos - Amortizacao 
+```
+**Imposto sobre Lucros:**
+```math
+Imposto a pagar = taxa * LAI
+```
+
+**Lucro Depois de Impostos (LDI):**
+```math
+LDI = LAI - Imposto a pagar = LAI - t * LAI = LAI (1 - t)
+```
+
+**Fluxo de Caixa Operacional (FCO):**
+```math
+FCO = LDI + Amortizacao
+```
+
+*Adiciona-se a amortização porque não é uma saída efetiva de caixa.*
+
+**Fluxo de Caixa Total por Ano:**
+```math
+FC_0=−Investimento Inicial−Fundo de Maneio
+```
+
+```math
+FC_n = FCO+Valor Residual+Recuperacao do Fundo de Maneio
+```
+
+Resumo das Etapas para Resolver os Exercícios:
+
+1. Calcular a amortização anual.
+2. Determinar o LAI, imposto e LDI.
+3. Calcular o FCO (LDI + Amortização).
+4. Montar os fluxos de caixa totais (incluindo investimento inicial e fundo de maneio).
+5. Aplicar as fórmulas de VAL, TIR e Payback.
+6. Concluir sobre a viabilidade com base nos critérios.
+
+
+### 2. Fórmulas para Análise de Viabilidade
+
+**Valor Atual Líquido (VAL):**
+```math
+VAL = \sum_{t=0}^{t} \frac{FC_t}{(1 + r)^t}
+```
+
+Critério:
+- Se VAL > 0, o projeto é viável.
+- Se VAL < 0, o projeto não é viável.
+
+**Taxa Interna de Retorno (TIR):**
+```math
+TIR = i \text{ tal que } VAL = 0
+```
+
+Critério:
+- Se TIR > i (taxa de desconto), o projeto é viável.
+- Se TIR < i, o projeto não é viável.
+
+**Tempo de Recuperação (Payback):**
+```math
+Payback = \text{Tempo necessário para recuperar o investimento inicial}
+```
+
+```math
+Payback Descontado=Ano onde o VAL acumulado se torna positivo.
+```
+
+### 3. Fórmulas Auxiliares
+**Fator de Desconto (Valor Presente de um Fluxo Futuro):**
+```math
+VP = \frac{FC_t}{(1 + r)^t}
+```
+
+FC = Fluxo de Caixa no ano t
+
+**Valor Presente de uma Anuidade (Fluxos Iguais):**
+```math
+VP = FC \times \left( \frac{1 - (1 + r)^{-n}}{r} \right)
+```
+
+**Valor Presente de um Valor Residual ou Único no Futuro:**
+```math
+VP = \frac{VR}{(1 + r)^n}
+```
+
+VR = Valor Residual
