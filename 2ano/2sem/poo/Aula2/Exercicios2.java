@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Exercicios2 {
     private ArrayList<LocalDate> datas;
@@ -12,21 +14,18 @@ public class Exercicios2 {
         return min;
     }
 
-    public void insereData (LocalDate data) datas.add(data);
+    public void insereData (LocalDate data){ 
+        datas.add(data);
+    }
 
     public LocalDate dataMaisProxima(LocalDate data) {
-        LocalDate closestDate = null;
-        long minDifference = Long.MAX_VALUE;
-
-        for (LocalDate date : dates) {
-            long difference = Math.abs(date.toEpochDay() - data.toEpochDay());
-            if (difference < minDifference) {
-                minDifference = difference;
-                closestDate = date;
+        LocalDate maisProxima = datas.get(0);
+        for (LocalDate d : datas) {
+            if (d.isAfter(data) && (maisProxima.isAfter(data) || d.isBefore(maisProxima))) {
+                maisProxima = d;
             }
         }
-
-        return closestDate;
+        return maisProxima;
     }
 
     public String toString() {
@@ -42,7 +41,16 @@ public class Exercicios2 {
      * @param array
      */
     public static void sortArray(int[] array) {
-        Arrays.sort(array);
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    // troca os elementos
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
     }
 
     /**
@@ -52,7 +60,22 @@ public class Exercicios2 {
      * @return
      */
     public static int binarySearch(int[] array, int key) {
-        return Arrays.binarySearch(array, key);
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (array[mid] == key) {
+                return mid; // elemento encontrado
+            }
+            if (array[mid] < key) {
+                left = mid + 1; // procura na metade direita
+            } else {
+                right = mid - 1; // procura na metade esquerda
+            }
+        }
+        return -1; // elemento não encontrado
     }
 
     /**
@@ -62,8 +85,11 @@ public class Exercicios2 {
      * @return
      */
     public static String[] uniqueStrings(String[] array) {
-        Set<String> uniqueSet = new HashSet<>(Arrays.asList(array)); // convertemos o array numa lista e depois transformamos num HashSet para eliminar os duplicados
-        return uniqueSet.toArray(new String[0]); // voltamos a converter para array
+        Set<String> uniqueSet = new HashSet<>();
+        for (String str : array) {
+            uniqueSet.add(str); // adiciona cada string ao conjunto
+        }
+        return uniqueSet.toArray(new String[0]); // converte o Set de volta para um array
     }
 
     /**
@@ -87,19 +113,15 @@ public class Exercicios2 {
      * @return
      */
     public static String[] duplicateStrings(String[] array) {
-        Map<String, Integer> countMap = new HashMap<>();
-        for (String str : array) {
-            countMap.put(str, countMap.getOrDefault(str, 0) + 1);
-        }
+        Set<String> duplicates = new HashSet<>();
+        Set<String> seen = new HashSet<>();
 
-        List<String> duplicates = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
-            if (entry.getValue() > 1) {
-                duplicates.add(entry.getKey());
+        for (String str : array) {
+            if (!seen.add(str)) { // se o elemento já foi visto, adiciona ao conjunto de duplicados
+                duplicates.add(str);
             }
         }
-
-        return duplicates.toArray(new String[0]);
+        return duplicates.toArray(new String[0]); // converte o Set de volta para um array
     }
 
     /**

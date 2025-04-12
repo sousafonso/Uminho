@@ -27,7 +27,7 @@ public class Youtube{
         this.dislikes = 0;
     }
 
-    public Yotube (String nome, byte[] conteudo, LocalDate dataCarregamento, int resolucaoX, int resolucaoY, int duracaoMinutos, int duracaoSegundos, ArrayList<String> comentarios, int likes, int dislikes){
+    public Youtube (String nome, byte[] conteudo, LocalDate dataCarregamento, int resolucaoX, int resolucaoY, int duracaoMinutos, int duracaoSegundos, ArrayList<String> comentarios, int likes, int dislikes){
         this.nome = nome;
         this.conteudo = conteudo;
         this.dataCarregamento = dataCarregamento;
@@ -135,27 +135,5 @@ public class Youtube{
     public String processa() {
         // Para fins de teste, retornamos uma string representando o conteúdo do vídeo
         return "Processando conteúdo do vídeo: " + nome;
-    }
-
-    // Método principal para testar a classe VideoYouTube
-    public static void main(String[] args) {
-        // Criando um vídeo de exemplo
-        byte[] conteudo = new byte[]{0, 1, 2, 3};  // Conteúdo fictício
-        VideoYouTube video = new VideoYouTube("Exemplo", conteudo, LocalDate.now().minusDays(5), 1920, 1080, 10, 30);
-
-        // Testando métodos de inserção e acesso
-        video.insereComentario("Ótimo vídeo!");
-        video.insereComentario("Muito informativo.");
-
-        // Testando método qtsDiasDepois
-        System.out.println("Dias desde o carregamento: " + video.qtsDiasDepois());
-
-        // Testando método thumbsUp
-        video.thumbsUp();
-        video.thumbsUp();
-        System.out.println("Número de likes: " + video.getLikes());
-
-        // Testando método processa
-        System.out.println(video.processa());
     }
 }

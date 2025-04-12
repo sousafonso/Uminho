@@ -2,23 +2,19 @@ public class Circulo {
     private Ponto p = new Ponto();
     private double raio;
 
-    public double getX (){
-        return this.p.getX();
+    public Circulo(){
+        this.p.setX(0);
+        this.p.setY(0);
+        this.raio = 1;
     }
-    public double getY (){
-        return this.p.getY();
+    public Circulo(int x, int y, double raio){
+        this.p.setX(x);
+        this.p.setY(y);
+        this.raio = raio;
     }
 
     public double getRaio(){
         return this.raio;
-    }
-
-    public void setX(double x){
-        this.x=x;
-    }
-
-    public void setY(double y){
-        this.y=y;
     }
 
     public void setRaio(double raio){
@@ -26,13 +22,15 @@ public class Circulo {
     }
 
     public void alteraCentro(double x, double y){
-        p.setX(x);
-        p.setY(y);
+        this.p.setX(x);
+        this.p.setY(y);
     }
 
     public double calculaArea(){
-        return 2*pi*pow(getRaio(),2);
+        return Math.PI * Math.pow(raio, 2);
     }
 
-    public double calculaPerimetro()
+    public double calculaPerimetro(){
+        return 2 * Math.PI * raio;
+    }
 }

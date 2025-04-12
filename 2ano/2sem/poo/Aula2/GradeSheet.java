@@ -11,7 +11,7 @@ public class GradeSheet{
         grades[studentIndex] = studentGrades;
     }
 
-    public int somaGrades (int uc, int[5][5] studentGrades){
+    public int somaGrades (int uc, int[][] studentGrades){
         int soma = 0;
         for (int i = 0; i < 5; i++){
             soma += studentGrades[i][uc];
@@ -32,7 +32,11 @@ public class GradeSheet{
     }
 
     public double mediaUCV2(int subjectIndex) {
-        return (double) sumGradesForSubject(subjectIndex) / grades.length;
+        double total = 0;
+        for (int[] studentGrades : grades) {
+            total += studentGrades[subjectIndex];
+        }
+        return total / grades.length;
     }
 
     public int maisAlta (int [][] studentGrades){
@@ -80,13 +84,17 @@ public class GradeSheet{
     }
 
     public int [] notasAltas (int [][] studentGrades, int valor){
-        int [] newArray;
+        int [] notasAltas = new int[25];
+        int index = 0;
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){
-                if (nota < studentGrades[i][j]) newArray.add(studentGrades[i][j]);
+                if (studentGrades[i][j] > valor){
+                    notasAltas[index] = studentGrades[i][j];
+                    index++;
+                }
             }
         }
-        return newArray;
+        return notasAltas;
     }
 
     public int[] notasAltasV2 (int value) {
@@ -114,15 +122,15 @@ public class GradeSheet{
 
     public int maiorMedia (int [][] studentGrades){
         double maiorMedia = 0;
-        double mediaUC = 0;
-        int indice;
+        int aluno = 0;
         for (int i = 0; i < 5; i++){
-            for (int j = 0; j < 5; j++){
-                mediaUC = mediaUC(i, studentGrades);
-                if (mediaUC > maiorMedia) indice = i;
+            double media = mediaAluno(i, studentGrades);
+            if (maiorMedia < media){
+                maiorMedia = media;
+                aluno = i;
             }
         }
-        return i;
+        return aluno;
     }
 }
 

@@ -16,8 +16,13 @@ public class Sensor{
     }
 
     public boolean setPressao(double valor){
-        if(this.pressao > 0) this.pressao = valor; return true;
-        else return false;
+        if (valor >= 0) {
+            this.pressao = valor;
+            return true;
+        } else {
+            System.out.println("Valor inválido. A pressão não pode ser negativa.");
+            return false;
+        }
     }
 
     public double getPressao(){

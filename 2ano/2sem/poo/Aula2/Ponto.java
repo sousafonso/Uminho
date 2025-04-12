@@ -22,8 +22,8 @@
  public class Ponto {
     
     //variÃ¡veis de instÃ¢ncia
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     
     /**
      * Construtores da classe Ponto.
@@ -73,7 +73,7 @@
      * 
      * @return valor da coordenada x.
      */
-    public int getX() {
+    public double getX() {
       return this.x;
     }
     
@@ -82,7 +82,7 @@
      * 
      * @return valor da coordenada y.
      */
-    public int getY() {
+    public double getY() {
       return this.y;
     }
     
@@ -91,7 +91,7 @@
      * 
      * @param novoX novo valor da coordenada em X
      */
-    public void setX(int novoX) {
+    public void setX(double novoX) {
       this.x = novoX;
     }
     
@@ -100,7 +100,7 @@
      * 
      * @param novoY novo valor da coordenada em Y
      */
-    public void setY(int novoY) {
+    public void setY(double novoY) {
       this.y = novoY;
     }
     

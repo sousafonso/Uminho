@@ -16,14 +16,14 @@ public class Telemovel {
     private int armazenamentoApps;
 
     public boolean existeEspaco(int numeroBytes) {
-        return (armazenamentoTotal - espacoOcupado) >= numeroBytes;
+        return (espaco + numeroBytes) <= armazenamentoTotal;
     }
 
     public void instalaApp(String nome, int tamanho) {
         if (existeEspaco(tamanho)) {
             appsInstaladas.add(nome);
-            espacoOcupado += tamanho;
-            numeroApps++;
+            espaco += tamanho;
+            napps++;
             armazenamentoApps += tamanho;
         } else {
             System.out.println("Não há espaço suficiente para instalar a aplicação " + nome);
@@ -33,16 +33,19 @@ public class Telemovel {
     public void recebeMsg(String msg){
         if (mensagens.size() < armazenamentoMsgs) {
             mensagens.add(msg);
-            espacoOcupado += msg.getBytes().length;
+            espaco += msg.getBytes().length;
         } else {
             System.out.println("Não há espaço suficiente para armazenar a mensagem.");
         }
     }
 
     public double tamMedioApps(){
-        public double tamMedioApps() {
-            return numeroApps == 0 ? 0 : (double) armazenamentoApps / numeroApps;
+        if (appsInstaladas.isEmpty()) return 0;
+        double soma = 0;
+        for (String app : appsInstaladas) {
+            soma += app.getBytes().length;
         }
+        return soma / appsInstaladas.size();
     }
 
     public String maiorMsg() {
@@ -57,10 +60,13 @@ public class Telemovel {
     }
 
     public void removeApp(String nome, int tamanho){
-        numeroApps--;
-        espacoOcupado -= tamanho;
-        appsInstaladas.remove(nome);
-        armazenamentoApps-= tamanho;
+        if (appsInstaladas.remove(nome)) {
+            espaco -= tamanho;
+            napps--;
+            armazenamentoApps -= tamanho;
+        } else {
+            System.out.println("Aplicação " + nome + " não encontrada.");
+        }
     }
 
     public String getMarca() { return marca; }
@@ -69,11 +75,11 @@ public class Telemovel {
     public String getModelo() { return modelo; }
     public void setModelo(String modelo) { this.modelo = modelo; }
 
-    public int getResolucaoX() { return resolucaoX; }
-    public void setResolucaoX(int resolucaoX) { this.resolucaoX = resolucaoX; }
+    public int getResolucaoX() { return displayX; }
+    public void setResolucaoX(int resolucaoX) { this.displayX = resolucaoX; }
 
-    public int getResolucaoY() { return resolucaoY; }
-    public void setResolucaoY(int resolucaoY) { this.resolucaoY = resolucaoY; }
+    public int getResolucaoY() { return displayY; }
+    public void setResolucaoY(int resolucaoY) { this.displayY = resolucaoY; }
 
     public int getArmazenamentoMsgs() { return armazenamentoMsgs; }
     public void setArmazenamentoMsgs(int armazenamentoMsgs) { this.armazenamentoMsgs = armazenamentoMsgs; }
@@ -87,14 +93,14 @@ public class Telemovel {
     public int getArmazenamentoApps() { return armazenamentoApps; }
     public void setArmazenamentoApps(int armazenamentoApps) { this.armazenamentoApps = armazenamentoApps; }
 
-    public int getEspacoOcupado() { return espacoOcupado; }
-    public void setEspacoOcupado(int espacoOcupado) { this.espacoOcupado = espacoOcupado; }
+    public int getEspacoOcupado() { return espaco; }
+    public void setEspacoOcupado(int espacoOcupado) { this.espaco = espacoOcupado; }
 
-    public int getNumeroFotos() { return numeroFotos; }
-    public void setNumeroFotos(int numeroFotos) { this.numeroFotos = numeroFotos; }
+    public int getNumeroFotos() { return nfotos; }
+    public void setNumeroFotos(int numeroFotos) { this.nfotos = numeroFotos; }
 
-    public int getNumeroApps() { return numeroApps; }
-    public void setNumeroApps(int numeroApps) { this.numeroApps = numeroApps; }
+    public int getNumeroApps() { return napps; }
+    public void setNumeroApps(int numeroApps) { this.napps = numeroApps; }
 
     public ArrayList<String> getAppsInstaladas() { return appsInstaladas; }
     public void setAppsInstaladas(ArrayList<String> appsInstaladas) { this.appsInstaladas = appsInstaladas; }
@@ -105,15 +111,15 @@ public class Telemovel {
     public Telemovel(String marca, String modelo, int resolucaoX, int resolucaoY, int armazenamentoMsgs, int armazenamentoTotal) {
         this.marca = marca;
         this.modelo = modelo;
-        this.resolucaoX = resolucaoX;
-        this.resolucaoY = resolucaoY;
+        this.displayX = resolucaoX;
+        this.displayY = resolucaoY;
         this.armazenamentoMsgs = armazenamentoMsgs;
         this.armazenamentoTotal = armazenamentoTotal;
         this.armazenamentoFotos = 0;
         this.armazenamentoApps = 0;
-        this.espacoOcupado = 0;
-        this.numeroFotos = 0;
-        this.numeroApps = 0;
+        this.espaco = 0;
+        this.nfotos = 0;
+        this.napps = 0;
         this.appsInstaladas = new ArrayList<>();
         this.mensagens = new ArrayList<>();
     }
