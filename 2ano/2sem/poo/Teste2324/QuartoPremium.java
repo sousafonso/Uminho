@@ -1,4 +1,3 @@
-public class QuartoPremium extends Quarto{
-    private float metrosQua;
-    private float preco;
+public class QuartoPremium extends Quarto {
+    
 }

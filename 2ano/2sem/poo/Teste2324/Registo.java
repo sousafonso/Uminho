@@ -1,70 +1,51 @@
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Registo implements Comparable<Registo>, Serializable {
-    private int id;
-    private LocalDate inicio;
-    private LocalDate fim;
+    private static int proximoId = 1;
+    private int numeroRegisto;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private Quarto quarto;
+    private int[] idadesOcupantes; // Para suportar desconto senior
 
-    public Registo(int id, LocalDate inicio, LocalDate fim, Quarto quarto) {
-        this.id = id;
-        this.inicio = inicio;
-        this.fim = fim;
-        this.quarto = quarto;
+    public Registo(LocalDate dataInicio, LocalDate dataFim, Quarto quarto) {
+        this(dataInicio, dataFim, quarto, null);
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public LocalDate getInicio() {
-        return inicio;
-    }
-    public void setInicio(LocalDate inicio) {
-        this.inicio = inicio;
-    }
-    public LocalDate getFim() {
-        return fim;
-    }
-    public void setFim(LocalDate fim) {
-        this.fim = fim;
-    }
-    public Quarto getQuarto() {
-        return quarto;
-    }
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
+    public Registo(LocalDate dataInicio, LocalDate dataFim, Quarto quarto, int[] idades) {
+        this.numeroRegisto = proximoId++;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.quarto = quarto.clone();
+        this.idadesOcupantes = idades != null ? idades.clone() : null;
     }
 
-    // Calcula o número de dias da reserva
     public int numDiasReserva() {
-        return (int) Duration.between(inicio.atStartOfDay(), fim.atStartOfDay()).toDays();
+        return (int) ChronoUnit.DAYS.between(dataInicio, dataFim) + 1;
     }
 
-    // Valor a pagar default: dias reservados * preço por dia do quarto
     public double valorAPagar() {
-        return numDiasReserva() * quarto.precoPorDia();
-    }
-
-    // Para o caso específico de quartos seniores, o valor a pagar poderá ter desconto adicional.
-    // Exemplo: desconto de 25% da soma das idades dos ocupantes.
-    public double valorAPagar(List<Integer> idades) {
-        double base = numDiasReserva() * quarto.precoPorDia();
-        int somaIdades = 0;
-        for (int idade : idades) {
-            somaIdades += idade;
+        double precoBase = quarto.precoPorDia() * numDiasReserva();
+        if (quarto instanceof QuartoDuploSenior && idadesOcupantes != null) {
+            int somaIdades = idadesOcupantes[0] + idadesOcupantes[1];
+            double desconto = precoBase * (0.25 * somaIdades / 100);
+            return precoBase - desconto;
         }
-        double desconto = 0.25 * somaIdades;
-        return base - desconto;
+        return precoBase;
     }
 
     @Override
-    public int compareTo(Registo outro) {
-        return Integer.compare(this.id, outro.getId());
+    public int compareTo(Registo o) {
+        return Integer.compare(this.numeroRegisto, o.numeroRegisto);
+    }
+
+    public LocalDate getDataInicio() {
+        return dataInicio;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
     }
 }

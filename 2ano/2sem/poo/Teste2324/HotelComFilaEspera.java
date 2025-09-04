@@ -1,41 +1,51 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HotelComFilaEspera extends Hotel {
+public class HotelComFilaEspera extends Hotel implements Serializable {
     private List<Registo> reservasEmEspera;
-    
+
     public HotelComFilaEspera(Iterator<Quarto> quartos) {
         super(quartos);
-        reservasEmEspera = new ArrayList<>();
+        this.reservasEmEspera = new ArrayList<>();
     }
-    
-    // Regista uma reserva em espera (sem atribuição de quarto)
+
     public void adicionaReserva(LocalDate entrada, LocalDate saida) {
-        int novoId = reservasEmEspera.size() + 1;
-        // Para reservas em espera, o quarto pode ser null
-        Registo reserva = new Registo(novoId, entrada, saida, null);
-        reservasEmEspera.add(reserva);
-    }
-    
-    // Verifica se existe, no momento, algum quarto livre e, se existir,
-    // atribui-o à reserva em espera há mais tempo (primeiro da lista)
-    public void ocupaQuartoComReservaEmEspera() {
-        if (!reservasEmEspera.isEmpty()) {
-            Registo reserva = reservasEmEspera.get(0);
-            try {
-                List<Quarto> livres = this.quartosLivres(reserva.getInicio(), reserva.getFim());
-                if (!livres.isEmpty()) {
-                    Quarto quarto = livres.get(0);
-                    int novoId = registos.size() + 1;
-                    Registo novoRegisto = new Registo(novoId, reserva.getInicio(), reserva.getFim(), quarto);
-                    registos.put(quarto, novoRegisto);
-                    reservasEmEspera.remove(0);
-                }
-            } catch (SemDisponibilidadeException e) {
-                // Se não houver quartos disponíveis, não faz nada.
+        List<Quarto> quartosLivres;
+        try {
+            quartosLivres = quartosLivres(entrada, saida);
+            if (!quartosLivres.isEmpty()) {
+                adicionaRegisto(entrada, saida, quartosLivres.get(0).getNumeroQuarto());
+            } else {
+                // Adiciona à fila de espera (usando um quarto genérico para o registo)
+                Quarto quartoPlaceholder = quartos.values().iterator().next().clone();
+                Registo registo = new Registo(entrada, saida, quartoPlaceholder);
+                reservasEmEspera.add(registo);
             }
+        } catch (SemDisponibilidadeException e) {
+            Quarto quartoPlaceholder = quartos.values().iterator().next().clone();
+            Registo registo = new Registo(entrada, saida, quartoPlaceholder);
+            reservasEmEspera.add(registo);
+        }
+    }
+
+    public void ocupaQuartoComReservaEmEspera() {
+        if (reservasEmEspera.isEmpty()) {
+            return;
+        }
+
+        Registo reserva = reservasEmEspera.get(0);
+        List<Quarto> quartosLivres;
+        try {
+            quartosLivres = quartosLivres(reserva.getDataInicio(), reserva.getDataFim());
+            if (!quartosLivres.isEmpty()) {
+                adicionaRegisto(reserva.getDataInicio(), reserva.getDataFim(), quartosLivres.get(0).getNumeroQuarto());
+                reservasEmEspera.remove(0);
+            }
+        } catch (SemDisponibilidadeException e) {
+            // Não faz nada, espera por nova tentativa
         }
     }
 }
