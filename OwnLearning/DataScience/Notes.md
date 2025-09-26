@@ -99,16 +99,16 @@ dara.dropna(axis=0,inplace=True)
 print(data)
 ```
 
-## Data Categories
+## Data Types
 Para analisar dados, também precisamos conhecer os tipos de dados com que estamos a lidar.
 
 Os dados podem ser divididos em duas categorias principais:
 
-**Dados Quantitativos** - Podem ser expressos como um número ou quantificados. Podem ser divididos em duas subcategorias:  
+**Dados Quantitativos / Numéricos** - Podem ser expressos como um número ou quantificados. Podem ser divididos em duas subcategorias:  
 - **Dados Discretos**: Números contados como "inteiros", por exemplo, número de alunos numa turma, número de golos num jogo de futebol.  
 - **Dados Contínuos**: Números que podem ter precisão infinita, por exemplo, peso de uma pessoa, tamanho de sapato, temperatura.  
 
-**Dados Qualitativos** - Não podem ser expressos como um número e não podem ser quantificados. Podem ser divididos em duas subcategorias:  
+**Dados Qualitativos / Categóricos** - Não podem ser expressos como um número e não podem ser quantificados. Podem ser divididos em duas subcategorias:  
 - **Dados Nominais**: Exemplo: género, cor do cabelo, etnia.  
 - **Dados Ordinais**: Exemplo: classificações escolares (A, B, C), estatuto económico (baixo, médio, alto).  
 
@@ -157,7 +157,7 @@ Onde:
 - b é o valor de y quando x = 0 (intercepto)
 
 Imaginemos o seguinte dataset:
-```markdown
+
 | Duration | Average_Pulse | Max_Pulse | Calorie_Burnage | Hours_Work | Hours_Sleep |
 |----------|---------------|-----------|-----------------|------------|-------------|
 | 30       | 80            | 120       | 240             | 10         | 7           |
@@ -170,7 +170,7 @@ Imaginemos o seguinte dataset:
 | 60       | 115           | 145       | 310             | 8          | 8           |
 | 75       | 120           | 150       | 320             | 0          | 8           |
 | 75       | 125           | 150       | 330             | 8          | 8           |
-```
+
 
 **Average_Pulse** - Pulsação média
 **Max_Pulse** - Pulsação máxima
@@ -288,4 +288,46 @@ import numpy as np
 
 var = np.var(health_data)
 print(var)
+```
+
+### Distribuição Normal
+A distribuição normal, também conhecida como distribuição gaussiana, é uma das distribuições de probabilidade mais importantes na estatística. Ela é caracterizada por uma curva em forma de sino, onde a maioria dos valores estão próximos da média, e a probabilidade de valores extremos diminui à medida que nos afastamos da média. A distribuição normal é definida por dois parâmetros: a média (μ) e o desvio padrão (σ).
+
+A distribuição normal é importante porque muitos fenômenos naturais e sociais seguem essa distribuição, como alturas, pesos, notas escolares, entre outros. Além disso, a distribuição normal é usada em muitas técnicas estatísticas, como testes de hipóteses e intervalos de confiança.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Parâmetros da distribuição normal
+mu = 0  # média
+sigma = 1  # desvio padrão  
+x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
+y = stats.norm.pdf(x, mu, sigma)
+plt.plot(x, y)
+plt.title('Distribuição Normal (μ=0, σ=1)')
+plt.xlabel('x')
+plt.ylabel('Densidade de Probabilidade')
+plt.grid()
+plt.show()
+```
+
+### Covariância e Correlação
+A covariância e a correlação são duas medidas estatísticas que descrevem a relação entre duas variáveis. A covariância mede a direção da relação linear entre as variáveis, enquanto a correlação mede a força e a direção da relação linear, normalizando a covariância pela variabilidade das variáveis.
+
+A covariância é calculada como:
+```python
+import numpy as np
+
+cov = np.cov(health_data['variavel1'], health_data['variavel2'])
+print(cov)
+```
+
+A correlação é calculada como:
+```python
+import numpy as np
+
+corr = np.corrcoef(health_data['variavel1'], health_data['variavel2'])
+print(corr)
 ```
