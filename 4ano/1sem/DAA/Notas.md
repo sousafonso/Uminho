@@ -293,6 +293,22 @@ Uma rede neuronal típica é composta por:
 - Camadas ocultas: processam os dados através de pesos (ativação) e funções de ativação (output);
 - Camada de saída: produz a previsão final.
 
+Exemplo por passos:
+1. Recebe múltiplas entradas: X₁, X₂, X₃, ... Normalmente nº de nós = nº de features
+2. Cada entrada tem um "peso" W associado (número que define importância)
+3. Multiplica: X₁×W₁ + X₂×W₂ + X₃×W₃ + ... (bias b)
+4. Passa pela "função de ativação" f()
+5. Produz a saída
+
+Imagine que você quer decidir se vai à praia:
+- Entrada 1 (Temperatura): 25°C → Peso W₁ = 2
+
+- Entrada 2 (Fim de semana): Sim → Peso W₂ = 3
+
+**Cálculo:** (25 × 2) + (1 × 3) = 53
+**Passa função ativação:** Se resultado > 30 → "Sim, vou!" | Se < 30 → "Não vou"
+
+
 Cada camada é formada por nós (neurónios) que estão interconectados. Cada conexão tem um peso associado que é ajustado durante o processo de treino para minimizar o erro na previsão.
 
 O conhecimento é armazenado nas conexões entre os neurónios, representadas por pesos. 
@@ -330,6 +346,64 @@ Existem diversas funções de ativação, por exemplo:
     \]
 - **Softplus:** \(f(x) = \ln(1 + e^{x})\)
 
+##### Arquiteturas comuns de redes neurais:
+- **Perceptron Multicamadas (MLP - Multi-Layer Perceptron):**
+    - Rede neural feedforward com múltiplas camadas ocultas. Tipo mais simples de rede neural onde a informação flui numa única direção, da camada de entrada para a camada de saída, passando pelas camadas ocultas (camadas intermediárias). 
+- **Redes Neurais Convolucionais (CNN - Convolutional Neural Networks):**
+    - Especialmente eficazes para processamento de imagens e reconhecimento de padrões espaciais.
+- **Redes Neurais Recorrentes (RNN - Recurrent Neural Networks):**
+    - Projetadas para dados sequenciais, como séries temporais e processamento de linguagem natural.
+- **Redes Neurais Generativas Adversariais (GAN - Generative Adversarial Networks):**
+    - Compostas por duas redes (gerador e discriminador) que competem entre si para gerar dados realistas.
+
+##### Problemas de Classificação:
+Temos de converter o output do modelo (valor numérico) numa classe. Para isso, temos duas hipóteses:
+- **One-hot encoding**: criar uma coluna para cada classe, atribuindo 1 à coluna correspondente à classe prevista e 0 às restantes.
+- **Softmax function**: converte os outputs numéricos em probabilidades para cada classe. A classe com a maior probabilidade é selecionada como a previsão final. Fórmula:
+\[P(y=i|X) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}\]
+Onde:
+- \(P(y=i|X)\) é a probabilidade da classe i dado o input X;
+- \(z_i\) é o output do modelo para a classe i;
+- K é o número total de classes.
+
+##### Backpropagation
+**Fase 1 - Forward pass:** os dados de entrada são propagados através da rede para gerar uma previsão. Analisar imagem de baixo para cima:
+1. Dados entram na rede. O input x passa pela tranformação linear L1 com peso W1 e bias b1: L1 = W1*x + b1
+2. O output passa pela função de ativação sigmoid S e ainda outra transformação linear L2 com peso W2 e bias b2: L2 = W2*S(L1) + b2
+3. Calcula-se a saída (previsão)
+4. Calcula-se o erro (diferença entre previsão e realidade). É calculado o erro através da função loss L que será para mediar a previsão. O objetivo é minimizar este erro.
+
+Exemplo:
+- Entrada: [25, 1]  (Temperatura, é fim de semana?)
+- Saída prevista: 0.7 (70% probabilidade de ir à praia)
+- Saída real: 1.0 (foi mesmo à praia)
+- Erro: 1.0 - 0.7 = 0.3
+
+<img src="forward.png" alt="forward pass" width="200"/>
+
+**Fase 2 - Backward pass:** o erro é propagado de volta através da rede para ajustar os pesos. Analisar imagem de cima para baixo:
+1. O erro volta para trás na rede. Para ajustar os pesos usando gradiente descendente, o gradiente do erro é propagado para trás (fim para inicio) através da rede.
+2. Calcula-se como cada peso contribuiu para o erro. Cada operação apresenta um gradiente (derivada parcial) que indica como o erro muda em relação a cada peso (entre os inputs e os outputs).
+3. Ajusta-se os pesos na direção certa (diminui erro) utilizando uma taxa de aprendizagem `alpha` (learning reate). Ao propagar o gradiente para trás, o gradiente anterior é multiplicado pelo gradiente da operação atual (regra da cadeia). Matemáticamente:
+\[\frac{\partial l}{\partial W_1} = \frac{\partial L_1}{\partial W_1} \cdot \frac{\partial S}{\partial L_1} \cdot \frac{\partial L_2}{\partial S} \cdot \frac{\partial l}{\partial L_2}\]
+
+4. Usa-se a "taxa de aprendizagem" (learning rate) para não ajustar muito.
+
+<img src="backword.png" alt="backward pass" width="300"/>
+
+Fórmula:
+\[w_{new} = w_{old} - \eta \cdot \frac{\partial E}{\partial w}\]
+Onde:
+- \(w_{new}\) é o novo peso;
+- \(w_{old}\) é o peso antigo;
+- \(\eta\) é a taxa de aprendizagem;
+- \(\frac{\partial E}{\partial w}\) é o gradiente do erro em relação ao peso.
+
+**Medidas para reduzir overfitting em redes neurais:**
+- Regularização L1 e L2: adicionam penalizações aos pesos na função de perda.
+- Adicionar mais casos de treino.
+- Reduzir a complexidade da rede (menos camadas/neuronios).
+- Dropout: desativar aleatoriamente neurónios durante o treino.
 
 ---
 
@@ -380,32 +454,6 @@ Vamos utilizar a seguinte metodologia:
 
 ---
 
-### Data Preparation
-1. Feature Scaling
-    - Normalization (Min-Max Scaling);
-    Serve para colocar os dados numa escala comum, geralmente entre 0 e 1.
-    2. Min-Max Scaling formula:
-    \[X_{scaled} = (b-a) \cdot \frac{X - X_{min}}{X_{max} - X_{min}} + a\]
-    Onde:
-    - \(X\) é o valor original;
-    - \(X_{min}\) é o valor mínimo do conjunto de dados;
-    - \(X_{max}\) é o valor máximo do conjunto de dados;
-    - \(a\) e \(b\) são os novos valores mínimo e máximo desejados;
-    - Standardization (Z-score Scaling);
-    Serve para transformar os dados para que tenham média 0 e desvio padrão 1.
-    2. Z-score Scaling formula:
-    \[X_{standardized} = \frac{X - \mu}{\sigma}\]
-    Onde:
-    - \(X\) é o valor original;
-    - \(\mu\) é a média do conjunto de dados;
-    - \(\sigma\) é o desvio padrão do conjunto de dados;
-
-2. Outlier Detection and Treatment
-    - Z-score method;
-    - Box plot method;
-    - Knowledge-based method;
-
----
 
 ### Data quality 
 1. Missing values;
@@ -452,6 +500,58 @@ print(data.info())  # Informações sobre o DataFrame
 print(data.describe())  # Estatísticas descritivas: média, desvio padrão, etc.
 ```
 
+#### Identificar valores ausentes (NaN)
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+print(data.isnull().sum())  # Conta valores ausentes por coluna
+```
+#### Analisar valores duplicados
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+print(data.duplicated().sum())  # Conta o número de linhas duplicadas
+```
+
+#### Matriz de correlação
+Mede a relação entre duas variáveis. Varia entre -1 e 1.
+- 1: correlação positiva perfeita, ou seja, quando uma variável aumenta, a outra também aumenta;
+- -1: correlação negativa perfeita, ou seja, quando uma variável aumenta, a outra diminui;
+- 0: sem correlação, ou seja, não há relação entre as variáveis;
+
+---
+
+### Data Transformation
+Gradient descent algorithms may work worse with variables with very different scales
+
+#### Standarization vs Normalization
+- **Standardization (Z-score Scaling)**: Transforma os dados para que tenham média 0 e desvio padrão 1. Útil quando os dados seguem uma distribuição normal.
+- **Normalization (Min-Max Scaling)**: Coloca os dados numa escala comum, geralmente entre 0 e 1. Útil quando os dados não seguem uma distribuição normal ou quando se deseja uma escala específica.
+
+1. Feature Scaling
+    - Normalization (Min-Max Scaling);
+    Serve para colocar os dados numa escala comum, geralmente entre 0 e 1.
+    2. Min-Max Scaling formula:
+    \[X_{scaled} = (b-a) \cdot \frac{X - X_{min}}{X_{max} - X_{min}} + a\]
+    Onde:
+    - \(X\) é o valor original;
+    - \(X_{min}\) é o valor mínimo do conjunto de dados;
+    - \(X_{max}\) é o valor máximo do conjunto de dados;
+    - \(a\) e \(b\) são os novos valores mínimo e máximo desejados;
+    - Standardization (Z-score Scaling);
+    Serve para transformar os dados para que tenham média 0 e desvio padrão 1.
+    2. Z-score Scaling formula:
+    \[X_{standardized} = \frac{X - \mu}{\sigma}\]
+    Onde:
+    - \(X\) é o valor original;
+    - \(\mu\) é a média do conjunto de dados;
+    - \(\sigma\) é o desvio padrão do conjunto de dados;
+
+2. Outlier Detection and Treatment
+    - Z-score method;
+    - Box plot method;
+    - Knowledge-based method;
+
 #### Drop de linhas com valores ausentes (NaN)
 ```python
 import pandas as pd
@@ -484,18 +584,92 @@ df = pd.read_csv('data.csv')
 df.fillna({"Calories": 130}, inplace=True)
 ```
 
-#### Matriz de correlação
-Mede a relação entre duas variáveis. Varia entre -1 e 1.
-- 1: correlação positiva perfeita, ou seja, quando uma variável aumenta, a outra também aumenta;
-- -1: correlação negativa perfeita, ou seja, quando uma variável aumenta, a outra diminui;
-- 0: sem correlação, ou seja, não há relação entre as variáveis;
+#### Remover duplicados
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+data.drop_duplicates(inplace=True)  # Remove linhas duplicadas
+```
 
----
+#### Mudar nome de colunas
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+data.rename(columns={'old_name': 'new_name'}, inplace=True)  # Renomeia colunas
+```
 
-### Data Transformation
-Gradient descent algorithms may work worse with variables with very different scales
+#### Remover colunas
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+data.drop(columns=['column_name1', 'column_name2'], inplace=True)  # Remove colunas
+```
 
+#### Histograma
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('file.csv')
+data['column_name'].hist(bins=10)  # Histograma da coluna
+plt.show()
 
-#### Standarization vs Normalization
-- **Standardization (Z-score Scaling)**: Transforma os dados para que tenham média 0 e desvio padrão 1. Útil quando os dados seguem uma distribuição normal.
-- **Normalization (Min-Max Scaling)**: Coloca os dados numa escala comum, geralmente entre 0 e 1. Útil quando os dados não seguem uma distribuição normal ou quando se deseja uma escala específica.
+# ou
+print(f"Histograma {data['column_name'].hist()}")
+```
+
+#### Distribuição normal
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+data = pd.read_csv('file.csv')
+sns.histplot(data['column_name'], kde=True)  # Histograma com curva KDE
+plt.show()
+
+# ou 
+print (f"Skweness: {data['column_name'].skew()}")
+
+# ou 
+print (f"Kurtosis: {data['column_name'].kurt()}")
+```
+
+#### Analisar as relações entre variáveis
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+data = pd.read_csv('file.csv')
+correlation_matrix = data.corr()  # Calcula a matriz de correlação
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')  # Heatmap da correlação
+plt.show()
+
+# ou 
+sns.pairplot(data)  # Pairplot para visualizar relações entre variáveis
+```
+
+#### Data binning
+É uma técnica de pré-processamento de dados que envolve a transformação de variáveis contínuas em variáveis categóricas, agrupando os valores em intervalos ou "bins". Isto pode ajudar a reduzir o ruído nos dados, melhorar a robustez dos modelos e facilitar a interpretação dos resultados. Está relacionado com o smoothing de dados, pois ambos visam reduzir a variabilidade nos dados.
+
+```python
+import pandas as pd
+data = pd.read_csv('file.csv')
+
+estimator = preprocessing.KBinsDiscretizer(n_bins=3, encode='ordinal', strategy='uniform')
+data['binned_column'] = estimator.fit_transform(data[['column_name']])
+
+print(data['Bin edges: ', estimator.bin_edges_[0]])
+print(data.groupby('binned_column').size())
+```
+
+#### Gráficos de dispersão
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+data = pd.read_csv('file.csv')
+
+fig, axs = plt.subplots(2,2, figsize=(10,10)) # Cria uma figura com 2x2 subplots
+fig.suptitle("Scatter Plots") # Adiciona um título à figura
+
+sns.histplot(data['column_name'], kde=True, ax=axs[0,0])  # Histograma com curva KDE no subplot (0,0)
+```
