@@ -91,7 +91,7 @@ ideator = AssistantAgent(
     system_message=SystemMessage(
         content="You are an innovative ideator who generates creative ideas."
     ),
-    llm_config=llm_config,
+    llm_config=LLM_KW,
 )
 
 engineer = AssistantAgent(
@@ -99,7 +99,7 @@ engineer = AssistantAgent(
     system_message=SystemMessage(
         content="You are a skilled engineer who transforms ideas into practical solutions."
     ),
-    llm_config=llm_config,
+    llm_config=LLM_KW,
 )
 ```
 
@@ -111,8 +111,8 @@ from autogen.message import SystemMessage
 user_proxy = UserProxyAgent(
     name="User",
     code_execution_config = False, # Não permite execução de código
-    human_input_mode = "Never", # Utilizador não interfere após a mensagem inicial
-    llm_config=llm_config,
+    human_input_mode = "NEVER", # Utilizador não interfere após a mensagem inicial
+    llm_config=LLM_KW,
 )
 ```
 
@@ -131,14 +131,14 @@ groupchat = GroupChat(
 manager = GroupChatManager(
     groupchat = groupchat,
     name = "Manager",
-    llm_config = llm_config,
+    llm_config = LLM_KW,
 )
 ```
 
 #### 3.2.6. Iniciar a Conversa
 ```python
-user_proxy.initialize_chat(
+user_proxy.initiate_chat(
     manager,
-    messagee="Proponham e avaliem uma ideia de produto inovador."
+    message="Proponham e avaliem uma ideia de produto inovador."
 )
 ```

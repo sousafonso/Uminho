@@ -1,8 +1,9 @@
 import json
 import os
-from autogen.agent.agent import AssistantAgent
-from autogen.agent.user_proxy_agent import UserProxyAgent
-from autogen.chat.group_chat import GroupChat
+from autogen import AssistantAgent
+from autogen import UserProxyAgent
+from autogen import GroupChat
+from autogen import GroupChatManager
 
 
 """
@@ -25,45 +26,45 @@ LLM_KW = {"config_list": config_list, "timeout": 120, "temperature": 0.2}
 
 travel_agent = AssistantAgent(
     name = "TravelAgent",
-    system_message = "You are TravelAgent, a travel planning assistant. You coordinate with PlannerAgent and BudgetAgent to create a 3-day travel itinerary based on user preferences and budget.",
+    system_message = "Você é o TravelAgent, um assistente de planeamento de viagens. Você coordena com o PlannerAgent e o BudgetAgent para criar um itinerário de viagem de 3 dias com base nas preferências e orçamento do utilizador.",
     llm_config = LLM_KW,
 )
 
 planner_agent = AssistantAgent(
     name = "PlannerAgent",
-    system_message = "You are PlannerAgent, responsible for creating a detailed 3-day travel itinerary based on user preferences provided by TravelAgent.",
+    system_message = "Você é o PlannerAgent, responsável por criar um itinerário detalhado de 3 dias com base nas preferências do utilizador fornecidas pelo TravelAgent.",
     llm_config = LLM_KW,
 )
 
 budget_agent = AssistantAgent(
     name = "BudgetAgent",
-    system_message = "You are BudgetAgent, responsible for estimating costs (flights, accommodation, activities) for the itinerary created by PlannerAgent and ensuring it fits within the user's budget.",
+    system_message = "Você é o BudgetAgent, responsável por estimar os custos (voos, alojamento, atividades) para o itinerário criado pelo PlannerAgent e garantir que se enquadra no orçamento do utilizador.",
     llm_config = LLM_KW,
 )
 
 user_proxy = UserProxyAgent(
     name = "UserProxy",
-    code_execution_enabled = False,
-    human_input_mode = "Never",
-    system_message = "You are UserProxy, simulating user interactions for testing the travel planning system.",
+    code_execution_config = False,
+    human_input_mode = "NEVER",
+    system_message = "Você é o UserProxy, simulando interações do utilizador para testar o sistema de planeamento de viagens.",
     llm_config = LLM_KW,
 )
 
 groupchat = GroupChat(
     agents = [user_proxy, travel_agent, planner_agent, budget_agent],
     messages = [],
-    max_rounds = 6,
+    max_round = 6,
     speaker_selection_method = "round_robin"
 )
 
 manager = GroupChatManager(
-    group_chat = groupchat,
+    groupchat = groupchat,
     name = "Manager",
     llm_config = LLM_KW,
 )
 
 # Simulação de user
-user_proxy.initialize_chat(
+user_proxy.initiate_chat(
     manager,
-    message = "Quero planear uma viagem de 3 dias a Paris com um orçamento de 1500 euros. Por favor, ajudem-me a criar um itinerário detalhado incluindo voos, alojamento e atividades."
+    message = "Quero planear uma viagem de 3 dias a Paris com um orçamento de 1500 euros. Por favor, ajudem-me a criar um itinerário detalhado incluindo voos, alojamento e atividades. Pretendo fazer a viagem no mês de dezembro. A visita ao museu do louvre é obrigatória"
 )
