@@ -1,0 +1,222 @@
+Todas as citações:
+
+“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”
+“It is our choices, Harry, that show what we truly are, far more than our abilities.”
+“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.”
+“The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.”
+“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”
+“Try not to become a man of success. Rather become a man of value.”
+“It is better to be hated for what you are than to be loved for what you are not.”
+“I have not failed. I've just found 10,000 ways that won't work.”
+“A woman is like a tea bag; you never know how strong it is until it's in hot water.”
+“A day without sunshine is like, you know, night.”
+
+
+Todos os autores:
+Albert Einstein
+J.K. Rowling
+Albert Einstein
+Jane Austen
+Marilyn Monroe
+Albert Einstein
+André Gide
+Thomas A. Edison
+Eleanor Roosevelt
+Steve Martin
+
+
+Todas as tags:
+change
+deep-thoughts
+thinking
+world
+abilities
+choices
+inspirational
+life
+live
+miracle
+miracles
+aliteracy
+books
+classic
+humor
+be-yourself
+inspirational
+adulthood
+success
+value
+life
+love
+edison
+failure
+inspirational
+paraphrased
+misattributed-eleanor-roosevelt
+humor
+obvious
+simile
+love
+inspirational
+life
+humor
+books
+reading
+friendship
+friends
+truth
+simile
+
+
+O primeiro autor da página:
+Albert Einstein
+
+
+A primeira citação:
+“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”
+
+
+O link 'Next' (se existir):
+/page/2/
+
+
+
+Parte 2: Usando seletores CSS:
+
+
+
+Todas as tags:
+change
+deep-thoughts
+thinking
+world
+abilities
+choices
+inspirational
+life
+live
+miracle
+miracles
+aliteracy
+books
+classic
+humor
+be-yourself
+inspirational
+adulthood
+success
+value
+life
+love
+edison
+failure
+inspirational
+paraphrased
+misattributed-eleanor-roosevelt
+humor
+obvious
+simile
+love
+inspirational
+life
+humor
+books
+reading
+friendship
+friends
+truth
+simile
+
+
+Todas as citações:
+“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”
+“It is our choices, Harry, that show what we truly are, far more than our abilities.”
+“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.”
+“The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.”
+“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”
+“Try not to become a man of success. Rather become a man of value.”
+“It is better to be hated for what you are than to be loved for what you are not.”
+“I have not failed. I've just found 10,000 ways that won't work.”
+“A woman is like a tea bag; you never know how strong it is until it's in hot water.”
+“A day without sunshine is like, you know, night.”
+
+
+Todos os autores:
+Albert Einstein
+J.K. Rowling
+Albert Einstein
+Jane Austen
+Marilyn Monroe
+Albert Einstein
+André Gide
+Thomas A. Edison
+Eleanor Roosevelt
+Steve Martin
+
+
+O primeiro autor da página:
+Albert Einstein
+
+
+A primeira citação:
+“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”
+
+
+O link 'Next' (se existir):
+/page/2/
+
+
+Todas as tags dentro de cada citação:
+[<a class="tag" href="/tag/change/page/1/">change</a>, <a class="tag" href="/tag/deep-thoughts/page/1/">deep-thoughts</a>, <a class="tag" href="/tag/thinking/page/1/">thinking</a>, <a class="tag" href="/tag/world/page/1/">world</a>]
+[<a class="tag" href="/tag/abilities/page/1/">abilities</a>, <a class="tag" href="/tag/choices/page/1/">choices</a>]
+[<a class="tag" href="/tag/inspirational/page/1/">inspirational</a>, <a class="tag" href="/tag/life/page/1/">life</a>, <a class="tag" href="/tag/live/page/1/">live</a>, <a class="tag" href="/tag/miracle/page/1/">miracle</a>, <a class="tag" href="/tag/miracles/page/1/">miracles</a>]
+[<a class="tag" href="/tag/aliteracy/page/1/">aliteracy</a>, <a class="tag" href="/tag/books/page/1/">books</a>, <a class="tag" href="/tag/classic/page/1/">classic</a>, <a class="tag" href="/tag/humor/page/1/">humor</a>]
+[<a class="tag" href="/tag/be-yourself/page/1/">be-yourself</a>, <a class="tag" href="/tag/inspirational/page/1/">inspirational</a>]
+[<a class="tag" href="/tag/adulthood/page/1/">adulthood</a>, <a class="tag" href="/tag/success/page/1/">success</a>, <a class="tag" href="/tag/value/page/1/">value</a>]
+[<a class="tag" href="/tag/life/page/1/">life</a>, <a class="tag" href="/tag/love/page/1/">love</a>]
+[<a class="tag" href="/tag/edison/page/1/">edison</a>, <a class="tag" href="/tag/failure/page/1/">failure</a>, <a class="tag" href="/tag/inspirational/page/1/">inspirational</a>, <a class="tag" href="/tag/paraphrased/page/1/">paraphrased</a>]
+[<a class="tag" href="/tag/misattributed-eleanor-roosevelt/page/1/">misattributed-eleanor-roosevelt</a>]
+[<a class="tag" href="/tag/humor/page/1/">humor</a>, <a class="tag" href="/tag/obvious/page/1/">obvious</a>, <a class="tag" href="/tag/simile/page/1/">simile</a>]
+
+
+O autor da primeira citação, usando hierarquia CSS:
+Albert Einstein
+
+
+Valor do atributo href do link About do autor:
+Atributo href do link About do autor: /author/Albert-Einstein
+Atributo href do link About do autor: /author/J-K-Rowling
+Atributo href do link About do autor: /author/Albert-Einstein
+Atributo href do link About do autor: /author/Jane-Austen
+Atributo href do link About do autor: /author/Marilyn-Monroe
+Atributo href do link About do autor: /author/Albert-Einstein
+Atributo href do link About do autor: /author/Andre-Gide
+Atributo href do link About do autor: /author/Thomas-A-Edison
+Atributo href do link About do autor: /author/Eleanor-Roosevelt
+Atributo href do link About do autor: /author/Steve-Martin
+
+
+Número total de tags associadas à citação:
+Número total de tags associadas à citação: 4
+Número total de tags associadas à citação: 2
+Número total de tags associadas à citação: 5
+Número total de tags associadas à citação: 4
+Número total de tags associadas à citação: 2
+Número total de tags associadas à citação: 3
+Número total de tags associadas à citação: 2
+Número total de tags associadas à citação: 4
+Número total de tags associadas à citação: 1
+Número total de tags associadas à citação: 3
+
+
+Conteúdo do atributo class de cada citação:
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']
+Conteúdo do atributo class da citação: ['quote']

@@ -10,7 +10,7 @@
 
 ---
 
-## <p style = "color: blue">  Application Layer </p>
+## 1. Application Layer
 
 A Application Layer representa a interface mais próxima do utilizador no modelo de redes, onde aplicações reais comunicam através da rede. O foco está em compreender conceitos e implementações de protocolos de aplicação, modelos de serviço de transporte e paradigmas arquiteturais fundamentais.
 
@@ -31,7 +31,7 @@ Escrever programas que:
 
 O princípio **end-to-end** determina que dispositivos de core de rede não executam aplicações de utilizador - apenas sistemas terminais o fazem, permitindo desenvolvimento e propagação rápida de aplicações
 
-### Arquiteturas de aplicações
+### 1.1. Arquiteturas de aplicações
 **Client-server**: cliente inicia comunicação, servidor espera pedidos. Ex.: web, email
 
 Server:
@@ -77,7 +77,7 @@ u_i = capacidade upload do peer i
 d_min = mínima capacidade download
 
 
-### Processos e Sockets
+### 1.2. Processos e Sockets
 Processo: programa em execução num host (ex.: browser, email client, web server)
 
 Com o mesmo host, dois processos comunicam utilizando **Inter-process Communication (IPC)**, definidos pelo sistema operativo. Processos em diferentes hosts comunicam através de **sockets**, trocando mensagens entre si.
@@ -92,7 +92,7 @@ Sockets normalmente são associados a portas.
 
 Para receber mensagens, um processo deve ter um identificador único. O identificador inclui tanto o IP como o número da porta.
 
-### Sockets programming
+### 1.3. Sockets programming
 Usa protocolos de transporte (TCP, UDP) para comunicação entre processos.
 
 **Protocolos**
@@ -103,7 +103,7 @@ Os protocolos definem:
 - Regras para lidar com erros
 - Regras para iniciar e terminar a comunicação
 
-### Transporte
+### 1.4. Transporte
 O transporte deve garantir:
 - Integridade dos dados
 - Timing: ou seja, entrega atempada, com pouco delay (latência)
@@ -120,7 +120,7 @@ Stored Audio/Video     |  Loss-tolerant  |  Same as above                       
 Interactive Games      |  Loss-tolerant  |  Few kbps up                            |  Yes, 10's msec
 Messaging              |  No loss        |  Elastic                                |  Yes and no    
 
-### TCP vs UDP
+### 1.5. TCP vs UDP
 | Characteristic            | TCP                       | UDP                       |
 |---------------------------|---------------------------|---------------------------|
 | Reliable transport        | ✓       | ✗      |
@@ -140,7 +140,7 @@ Messaging              |  No loss        |  Elastic                             
 
 - Ideal para aplicações tempo-real
 
-### Mapeamento de Aplicação-Transporte
+### 1.6. Mapeamento de Aplicação-Transporte
 Aplicação           |  Protocolo Aplicação  |  Transporte  
 --------------------|-----------------------|--------------
 Email               |  SMTP [RFC 5321]      |  TCP         
@@ -151,7 +151,7 @@ File Transfer       |  FTP [RFC 959]        |  TCP
 Streaming           |  DASH                 |  TCP         
 Telefonia Internet  |  SIP, RTP             |  UDP (ou TCP)
 
-## TLS - Transport Layer Security
+## 2. TLS - Transport Layer Security
 TCP e UDP por si só não oferecem encriptação - passwords e dados trafegam em texto plano pela Internet!
 
 TLS é um protocolo que fornece segurança nas comunicações pela Internet, garantindo:
@@ -161,14 +161,14 @@ TLS é um protocolo que fornece segurança nas comunicações pela Internet, gar
 
 TLS é frequentemente utilizado em conjunto com protocolos de aplicação, como HTTPS (HTTP sobre TLS), para proteger a comunicação web. Situa-se entre a camada de aplicação e a camada de transporte, funcionando sobre TCP.
 
-## Arquiteturas
-### Client-Server
+## 3. Arquiteturas
+### 3.1. Client-Server
 Na arquitetura client-server, o cliente inicia a comunicação enviando um pedido ao servidor. O servidor, que está sempre ativo e possui um endereço IP fixo, processa o pedido e envia a resposta de volta ao cliente. Esta arquitetura é comum em aplicações web, email e FTP.
 
-### Peer-to-Peer (P2P)
+### 3.2. Peer-to-Peer (P2P)
 Na arquitetura peer-to-peer, os pares comunicam diretamente entre si sem a necessidade de um servidor central. Cada par pode atuar tanto como cliente quanto como servidor, requisitando e fornecendo serviços. Esta arquitetura é utilizada em aplicações de compartilhamento de arquivos, VoIP e criptomoedas.
 
-### Client-Server vs P2P
+### 3.3. Client-Server vs P2P
 - Em Client-Server, o tempo p/ distribuir ficheiro cresce linearmente com N utilizadores.
 - Em P2P, cada novo cliente contribui com envio: crescimento de capacidade acompanha o crescimento de utilizadores.
 Exemplo: BitTorrent — cada peer descarrega e envia partes a outros, tornando downloads massivos mais rápidos e económicos.
@@ -179,7 +179,7 @@ Exemplo: BitTorrent — cada peer descarrega e envia partes a outros, tornando d
 **Tabela de comparação entre Client-Server e P2P**
 <img src="t1.png" alt="Cloud Services" width="600" justify-content="center"/>
 
-### File Sharing com BitTorrent
+### 3.4. File Sharing com BitTorrent
 BitTorrent é um protocolo P2P para compartilhamento de arquivos que divide os arquivos em pequenos pedaços chamados "chunks". Cada peer faz o download e envia chunks para outros peers, aumentando a eficiência do compartilhamento. Os chunks são todos do mesmo tamanho (normalmente 256 KBytes).
 
 Após um peer completar o download completo do arquivo, ele pode continuar a enviar chunks para outros peers, ajudando a distribuir o arquivo na rede ou apenas sair do ***torrent***.
@@ -188,7 +188,7 @@ Num ***torrent***, existe um tracker que ajuda os peers a encontrarem uns aos ou
 
 Imaginemos que a Alice entra no ***torrent***. O tracker envia-lhe X IPs de peers que pertencem também a esse ***torrent***. A Alice conecta-se a esses peers via TCP e pede-lhes os chunks que lhe faltam - **rarest first**. Para a Alice enviar chunks, é utilizado um algoritmo inteligente. Basicamente a Alice envia chunks para aqueles que lhe suplicam mais dados. A cada Y segundos ela envia chunks para um outro peer fora do seu top (chamado de **optimistic unchoking**), para descobrir novos peers que possam ser bons parceiros de troca - **Algoritmo Tit-for-Tat**.
 
-## Video Streaming and CDNs
+## 4. Video Streaming and CDNs
 O streaming de vídeo é uma aplicação comum que se beneficia de CDNs (Content Delivery Networks). As CDNs são redes de servidores distribuídos que armazenam cópias de conteúdo em locais geográficos próximos aos usuários finais. Isso reduz a latência e melhora a experiência do usuário.
 
 **Problemas comuns no streaming:**
@@ -198,24 +198,24 @@ O streaming de vídeo é uma aplicação comum que se beneficia de CDNs (Content
 
 3. **Variabilidade de bandwidth**: Congestionamento variável
 
-### Como funciona o streaming de vídeo?
-1. O usuário solicita um vídeo.
+### 4.1. Como funciona o streaming de vídeo?
+1. O utilizador solicita um vídeo.
 2. A CDN identifica o servidor mais próximo e entrega o vídeo a partir desse servidor.
-3. O vídeo é transmitido em pequenos chunks, permitindo que o usuário comece a assistir antes que o download completo seja concluído.
+3. O vídeo é transmitido em pequenos chunks, permitindo que o utilizador comece a assistir antes que o download completo seja concluído.
 
-### Vantagens das CDNs para streaming de vídeo
-- **Redução de Latência**: Servidores próximos ao usuário reduzem o tempo de carregamento.
+### 4.2. Vantagens das CDNs para streaming de vídeo
+- **Redução de Latência**: Servidores próximos ao utilizador reduzem o tempo de carregamento.
 - **Escalabilidade**: CDNs podem lidar com picos de tráfego, distribuindo a carga entre vários servidores.
 - **Resiliência**: Se um servidor falhar, outros servidores podem assumir, garantindo continuidade no serviço.
 
-### Multicast
+### 4.3. Multicast
 Multicast é uma técnica de transmissão de dados onde uma única fonte envia dados para múltiplos destinatários simultaneamente. Em vez de enviar cópias separadas dos dados para cada destinatário (**unicast**), o remetente envia uma única cópia que é replicada pela rede apenas quando necessário.
 
 **Multicast Group Membership Discovery Protocols**
 - **IGMP (Internet Group Management Protocol)**: Utilizado em redes IPv4 para gerenciar a associação de hosts a grupos multicast.
 - **MLD (Multicast Listener Discovery)**: Utilizado em redes IPv6 para o mesmo propósito.
 
-#### IGMP
+#### 4.3.1. IGMP
 1. Os hosts desejam entrar no grupo enviando um IGMP report;
 2. Os routers locais analisam esse report utilizando o multicast routing protocol (ex.: PIM) para garantir que os pacotes multicast sejam encaminhados para a rede local;
 3. Periodicamente, os routers enviam IGMP queries para verificar se ainda existem membros no grupo;

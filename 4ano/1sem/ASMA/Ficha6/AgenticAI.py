@@ -23,7 +23,6 @@ config_list = [{
 
 LLM_KW = {"config_list": config_list, "timeout": 120, "temperature": 0.2}
 
-
 travel_agent = AssistantAgent(
     name = "TravelAgent",
     system_message = "Você é o TravelAgent, um assistente de planeamento de viagens. Você coordena com o PlannerAgent e o BudgetAgent para criar um itinerário de viagem de 3 dias com base nas preferências e orçamento do utilizador.",
@@ -32,7 +31,7 @@ travel_agent = AssistantAgent(
 
 planner_agent = AssistantAgent(
     name = "PlannerAgent",
-    system_message = "Você é o PlannerAgent, responsável por criar um itinerário detalhado de 3 dias com base nas preferências do utilizador fornecidas pelo TravelAgent.",
+    system_message = "Você é o PlannerAgent, responsável por criar um itinerário detalhado de 15 dias com base nas preferências do utilizador fornecidas pelo TravelAgent.",
     llm_config = LLM_KW,
 )
 
@@ -66,5 +65,5 @@ manager = GroupChatManager(
 # Simulação de user
 user_proxy.initiate_chat(
     manager,
-    message = "Quero planear uma viagem de 3 dias a Paris com um orçamento de 1500 euros. Por favor, ajudem-me a criar um itinerário detalhado incluindo voos, alojamento e atividades. Pretendo fazer a viagem no mês de dezembro. A visita ao museu do louvre é obrigatória"
+    message = "Quero planear uma viagem de 15 dias onde consiga visitar a Malásia, Tailândia e Singapura sabendo que o orçamento é de 3000 euros e não regresso a Portugal, ou seja, inicialmente parto de Portugal, mas termino a viagem em Singapura. Por favor, ajudem-me a criar um itinerário detalhado incluindo voos, alojamento e atividades. Pretendo fazer a viagem no mês de julho."
 )

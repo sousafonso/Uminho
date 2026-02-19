@@ -4,7 +4,7 @@ from spade.behaviour import CyclicBehaviour, OneShotBehaviour
 from spade.message import Message
 
 class ReceiverAgent(Agent):
-    class ReceiveMsgBehaviour(CyclicBehaviour):
+    class ReceiveMsgBehaviour(CyclicBehaviour): # Behaviour para receber mensagens de forma cíclica, ou seja, executa continuamente até ser parado ou o timeout ser atingido
         async def run(self):
             msg = await self.receive(timeout=10)
             if msg:
@@ -17,7 +17,7 @@ class ReceiverAgent(Agent):
         self.add_behaviour(self.ReceiveMsgBehaviour())
 
 class SenderAgent(Agent):
-    class SendMsgBehaviour(OneShotBehaviour):
+    class SendMsgBehaviour(OneShotBehaviour): # Behaviour para enviar mensagens de forma única, ou seja, executa uma vez e termina
         async def run(self):
             msg = Message(to="receiver_agent@localhost")
             msg.body = "Olá, esta é a mensagem do sender!"
