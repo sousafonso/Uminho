@@ -27,3 +27,16 @@ Com IA não podemos avaliar a personalidade de uma pessoa, atribuindo valores a 
 [CDC NHANES](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?utm_source=chatgpt.com)
 [CDC NHANES](https://wwwn.cdc.gov/nchs/nhanes/?utm_source=chatgpt.com)
 [UCL Machine Learning Repository](https://archive.ics.uci.edu/datasets?skip=0&take=10&sort=desc&orderBy=NumHits&search=&Area=Biology&Area=Health+and+Medicine)
+
+---
+## Embeddings
+- **Definição**: Representação numérica de dados, como palavras ou documentos, num espaço vetorial.
+- **Aplicações**: Processamento de linguagem natural, recomendação de produtos, análise de sentimentos, entre outros.
+- **Técnicas**: Word2Vec, GloVe, FastText, BERT, entre outras.
+- **Vantagens**: Captura relações semânticas e contextuais entre os dados, permitindo melhor desempenho em tarefas de aprendizado de máquina.
+
+---
+## RAG (Retrieval-Augmented Generation)
+- **Definição**: Técnica que combina recuperação de informações com geração de texto, permitindo que modelos de linguagem acessem e utilizem informações externas para gerar respostas mais precisas e informativas.
+- **Aplicações**: Chatbots, assistentes virtuais, sistemas de perguntas e respostas, entre outros.
+- **Vantagens**: Melhora a qualidade das respostas geradas, especialmente em casos onde o modelo de linguagem pode não ter conhecimento prévio suficiente sobre um tópico específico.
