@@ -2,27 +2,25 @@ import random
 import json
 
 # Escreva um programa que leia um número inteiro do utilizador e apresente o seu antecessor e sucessor.
-def antecessor_sucessor(numero):
-    antecessor = numero - 1
-    sucessor = numero + 1
-    print("Antecesso: " + antecessor)
-    print("\nNumero: " + numero)
-    print("\nSucessor: " + sucessor)
+def antecessor_sucessor():
+    numero = int(input("Digite um número inteiro: "))
+    print("Antecessor: " + str(numero - 1))
+    print("\nNumero: " + str(numero))
+    print("\nSucessor: " + str(numero + 1))
 
 # Desenvolva um programa que leia a base e a altura de um retângulo e calcule a sua área.
-def area_retangulo(base, altura):
+def area_retangulo() -> float:
+    base = float(input("Digite a base do retângulo: "))
+    altura = float(input("Digite a altura do retângulo: "))
     return base * altura
 
 # Crie um programa que converta uma temperatura de Celsius para Fahrenheit.
-def temp_conversor(celsius):
+def temp_conversor(celsius) -> float:
     return (9/5) * celsius + 32
 
 # Escreva um programa que determine se um número inteiro é par ou ímpar.
 def par_impar (numero):
-    if numero % 2 == 0:
-        return "Par"
-    else:
-        return "Impar"
+    return "Par" if numero % 2 == 0 else "Ímpar"
     
 # Desenvolva um programa que leia quatro notas e calcule a média aritmética.
 def media_notas (nota1, nota2, nota3, nota4):
@@ -65,10 +63,7 @@ def imc (peso, altura):
     
 # Crie um programa que determine se um ano é bissexto.
 def bissexto (ano):
-    if (ano % 4 == 0 and not ano % 100 == 0) or ano % 400 == 0:
-        return "Bissexto"
-    else:
-        return "Não bissexto"
+    return "Bissexto" if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0) else "Não é bissexto"
     
 # Desenvolva uma calculadora que realize as quatro operações básicas (+, -, *, /) conforme escolha do utilizador.
 def calculadora (num1, num2, op):
@@ -117,17 +112,15 @@ def conta_vogais(palavra):
             contador += 1
     return contador
     
-# Desenvolva um programa que inverta uma string sem usar métodos prontos.
+# Desenvolva um programa que inverta uma string.
 def reverse (palavra : str):
-    nova_palavra = ""
-    for l in palavra:
-        nova_palavra -= l
-    return nova_palavra
+    return "".join(reversed(palavra))
 
 # Escreva um programa que conte o número de palavras numa frase.
 def conta_words (palavra : str):
     words = palavra.split() 
-    
+    return len(words)
+
 """
  Desenvolva um programa que valide uma senha segundo os critérios:
 • Mínimo 8 caracteres
@@ -454,9 +447,9 @@ def procura_binaria(lista: list, elemento):
     while esquerda <= direita:
         meio = (esquerda + direita) // 2
         
-        if lista[meio] == valor:
+        if lista[meio] == elemento:
             return meio
-        elif lista[meio] < valor:
+        elif lista[meio] < elemento:
             esquerda = meio + 1
         else:
             direita = meio - 1
@@ -464,7 +457,7 @@ def procura_binaria(lista: list, elemento):
     return -1
 
 # Versão recursiva
-def busca_binaria_recursiva(lista, valor, esquerda=0, direita=None):
+def busca_binaria_recursiva(lista, elemento, esquerda=0, direita=None):
     """Busca binária recursiva."""
     if direita is None:
         direita = len(lista) - 1
@@ -474,10 +467,10 @@ def busca_binaria_recursiva(lista, valor, esquerda=0, direita=None):
     
     meio = (esquerda + direita) // 2
     
-    if lista[meio] == valor:
+    if lista[meio] == elemento:
         return meio 
-    elif lista[meio] < valor:
-        return busca_binaria_recursiva(lista, valor, meio + 1, direita)
+    elif lista[meio] < elemento:
+        return busca_binaria_recursiva(lista, elemento, meio + 1, direita)
     else:
-        return busca_binaria_recursiva(lista, valor, esquerda, meio - 1)
+        return busca_binaria_recursiva(lista, elemento, esquerda, meio - 1)
     
